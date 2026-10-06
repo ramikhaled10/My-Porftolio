@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.title }} | Case Study • Rami Khaled{% endblock %}
+{% block meta_description %}{{ project.summary }}{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    
+    <!-- Breadcrumb / Back Link -->
+    <div class="mb-8">
+        <a href="{{ url_for('projects.list_projects') }}" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-sky-600 dark:hover:text-sky-400 font-mono">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to All Projects
+        </a>
+    </div>
+
+    <!-- Case Study Header -->
+    <header class="mb-10 pb-8 border-b border-slate-200 dark:border-slate-800">
+        
+        <div class="flex flex-wrap items-center gap-2 mb-4">
+            <span class="inline-block text-xs font-mono font-semibold px-2.5 py-1 rounded-md bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 border border-sky-100 dark:border-sky-900">
+                {{ project.category }}
+            </span>
+            {% if project.featured %}
+            <span class="inline-flex items-center gap-1 text-xs font-semibold text-amber-600 dark:text-amber-400">
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i> Featured Project
+            </span>
+            {% endif %}
+        </div>
+
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-4 leading-tight">
+            {{ project.title }}
+        </h1>
+
+        <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+            {{ project.summary }}
+        </p>
+
+        <!-- Tech Stack Pills -->
+        <div class="flex flex-wrap items-center gap-2 mb-6">
+            <span class="text-xs font-mono text-slate-400 mr-2">Built with:</span>
+            {% for tech in project.tech_list %}
+            <span class="text-xs font-mono px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                {{ tech }}
+            </span>
+            {% endfor %}
+        </div>
+
+        <!-- Action Links: GitHub & Demo -->
+        <div class="flex flex-wrap items-center gap-4 text-xs">
+            {% if project.github_url %}
+            <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors">
+                <i data-lucide="github" class="w-4 h-4"></i> View Source Code
+            </a>
+            {% else %}
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-mono italic">
+                <i data-lucide="git-branch" class="w-4 h-4"></i> Source code repository being curated for public release
+            </div>
+            {% endif %}
+
+            {% if project.demo_url %}
+            <a href="{{ project.demo_url }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-sky-600 text-white font-semibold hover:bg-sky-500 transition-colors">
+                <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
+            </a>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- Case Study Body Sections -->
+    <div class="space-y-10">
+        
+        <!-- Detailed Overview -->
+        <section class="rounded-2xl glass-panel p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800">
+            <div class="flex items-center gap-2.5 mb-4 text-sky-600 dark:text-sky-400 font-mono text-xs font-semibold">
+                <i data-lucide="info" class="w-4 h-4"></i>
+                <span>PROJECT OVERVIEW</span>
+            </div>
+            <div class="prose dark:prose-invert max-w-none text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
+                {{ project.description }}
+            </div>
+        </section>
+
+        <!-- Problem Statement -->
+        {% if project.problem %}
+        <section class="rounded-2xl glass-panel p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800">
+            <div class="flex items-center gap-2.5 mb-4 text-amber-600 dark:text-amber-400 font-mono text-xs font-semibold">
+                <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+                <span>THE PROBLEM IT SOLVES</span>
+            </div>
+            <div class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
+                {{ project.problem }}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Architecture & Engineering Approach -->
+        {% if project.approach %}
+        <section class="rounded-2xl glass-panel p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800">
+            <div class="flex items-center gap-2.5 mb-4 text-emerald-600 dark:text-emerald-400 font-mono text-xs font-semibold">
+                <i data-lucide="cpu" class="w-4 h-4"></i>
+                <span>ENGINEERING APPROACH & ARCHITECTURE</span>
+            </div>
+            <div class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
+                {{ project.approach }}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Key Features -->
+        {% if project.features_list %}
+        <section class="rounded-2xl glass-panel p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800">
+            <div class="flex items-center gap-2.5 mb-4 text-purple-600 dark:text-purple-400 font-mono text-xs font-semibold">
+                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                <span>KEY IMPLEMENTED FEATURES</span>
+            </div>
+            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-700 dark:text-slate-300">
+                {% for feature in project.features_list %}
+                <li class="flex items-start gap-2 p-3 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/60 dark:border-slate-800">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0"></i>
+                    <span>{{ feature }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+
+        <!-- Key Learnings & Takeaways -->
+        {% if project.key_learnings %}
+        <section class="rounded-2xl glass-panel p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800">
+            <div class="flex items-center gap-2.5 mb-4 text-sky-600 dark:text-sky-400 font-mono text-xs font-semibold">
+                <i data-lucide="brain" class="w-4 h-4"></i>
+                <span>WHAT I LEARNED & COGNITIVE TAKEAWAYS</span>
+            </div>
+            <div class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
+                {{ project.key_learnings }}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Challenges Overcome -->
+        {% if project.challenges %}
+        <section class="rounded-2xl glass-panel p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800">
+            <div class="flex items-center gap-2.5 mb-4 text-rose-600 dark:text-rose-400 font-mono text-xs font-semibold">
+                <i data-lucide="wrench" class="w-4 h-4"></i>
+                <span>CHALLENGES ENCOUNTERED & DEBUGGING</span>
+            </div>
+            <div class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
+                {{ project.challenges }}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Future Improvements -->
+        {% if project.future_improvements %}
+        <section class="rounded-2xl glass-panel p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800">
+            <div class="flex items-center gap-2.5 mb-4 text-indigo-600 dark:text-indigo-400 font-mono text-xs font-semibold">
+                <i data-lucide="sparkles" class="w-4 h-4"></i>
+                <span>POSSIBLE FUTURE EXTENSIONS</span>
+            </div>
+            <div class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
+                {{ project.future_improvements }}
+            </div>
+        </section>
+        {% endif %}
+
+    </div>
+
+    <!-- Related Projects Section -->
+    {% if related_projects %}
+    <div class="mt-16 pt-12 border-t border-slate-200 dark:border-slate-800">
+        <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-6">
+            Other Projects to Explore
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {% for rp in related_projects %}
+            <div class="rounded-xl glass-panel p-5 border border-slate-200/80 dark:border-slate-800 interactive-card flex flex-col justify-between">
+                <div>
+                    <span class="text-[11px] font-mono text-sky-600 dark:text-sky-400 block mb-1">
+                        {{ rp.category }}
+                    </span>
+                    <h3 class="font-bold text-slate-900 dark:text-white text-sm mb-2 hover:text-sky-600 transition-colors">
+                        <a href="{{ url_for('projects.detail', slug=rp.slug) }}">
+                            {{ rp.title }}
+                        </a>
+                    </h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 mb-3">
+                        {{ rp.summary }}
+                    </p>
+                </div>
+                <a href="{{ url_for('projects.detail', slug=rp.slug) }}" class="inline-flex items-center gap-1 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:text-sky-500">
+                    <span>View Case Study</span>
+                    <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

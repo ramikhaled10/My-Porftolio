@@ -1,0 +1,59 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}Contact Messages | Portfolio Admin{% endblock %}
+
+{% block admin_content %}
+<div class="space-y-6">
+    <div>
+        <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
+            Contact Messages & Inquiries
+        </h1>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+            Read messages received through the portfolio contact form.
+        </p>
+    </div>
+
+    <div class="space-y-4">
+        {% for msg in messages %}
+        <div class="p-6 rounded-2xl bg-white dark:bg-[#0d1424] border {% if not msg.is_read %}border-sky-300 dark:border-sky-800 ring-1 ring-sky-400/20{% else %}border-slate-200 dark:border-slate-800{% endif %} shadow-sm flex flex-col md:flex-row md:items-start justify-between gap-4">
+            <div class="space-y-2 max-w-2xl">
+                <div class="flex items-center gap-3">
+                    <span class="font-bold text-slate-900 dark:text-white text-base">{{ msg.name }}</span>
+                    <a href="mailto:{{ msg.email }}" class="text-xs text-sky-600 dark:text-sky-400 hover:underline font-mono">
+                        &lt;{{ msg.email }}&gt;
+                    </a>
+                    {% if not msg.is_read %}
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-sky-50 text-sky-700 dark:bg-sky-950/60 dark:text-sky-300 uppercase">
+                        New
+                    </span>
+                    {% endif %}
+                </div>
+                <h3 class="text-sm font-semibold text-slate-800 dark:text-slate-200">{{ msg.subject }}</h3>
+                <p class="text-xs text-slate-600 dark:text-slate-300 whitespace-pre-line leading-relaxed">{{ msg.message }}</p>
+                <span class="text-[10px] text-slate-400 font-mono block">Received: {{ msg.created_at.strftime('%Y-%m-%d %H:%M UTC') }}</span>
+            </div>
+
+            <div class="flex items-center gap-2 flex-shrink-0">
+                <form method="POST" action="{{ url_for('admin.message_toggle_read', id=msg.id) }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="px-3 py-1.5 rounded-lg text-xs font-semibold {% if msg.is_read %}bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400{% else %}bg-sky-600 text-white{% endif %}">
+                        {{ 'Mark as Unread' if msg.is_read else 'Mark as Read' }}
+                    </button>
+                </form>
+
+                <form method="POST" action="{{ url_for('admin.message_delete', id=msg.id) }}" class="delete-form inline">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="p-2 text-slate-400 hover:text-red-600 rounded-lg">
+                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <div class="text-center py-12 rounded-2xl bg-white dark:bg-[#0d1424] border border-slate-200 dark:border-slate-800 text-slate-500 text-xs">
+            No contact messages received yet.
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

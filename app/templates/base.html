@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Rami Khaled | Engineering Student & Developer{% endblock %}</title>
+    
+    <!-- SEO & Metadata -->
+    <meta name="description" content="{% block meta_description %}Official personal website and developer portfolio of Rami Khaled — First-year engineering student at École Nationale Polytechnique d'Alger (ENP). Exploring Python backend systems, algorithms, and Flutter mobile applications.{% endblock %}">
+    <meta name="author" content="Rami Khaled">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ request.base_url }}">
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.base_url }}">
+    <meta property="og:title" content="{% block og_title %}Rami Khaled | Engineering Student & Developer{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Discover the academic journey, software engineering projects, and technical exploration of Rami Khaled.{% endblock %}">
+    <meta property="og:site_name" content="Rami Khaled Portfolio">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Rami Khaled",
+      "nationality": "Algerian",
+      "homeLocation": "Souk El Tennine, Algeria",
+      "alumniOf": [
+        {
+          "@type": "EducationalOrganization",
+          "name": "École Nationale Polytechnique d'Alger (ENP)"
+        },
+        {
+          "@type": "EducationalOrganization",
+          "name": "Lycée Souk El Tennine"
+        }
+      ],
+      "jobTitle": "Engineering Student & Developer",
+      "knowsAbout": ["Python", "Flask", "Flutter", "SQL", "Algorithms", "Automation", "Software Engineering"]
+    }
+    </script>
+
+    <!-- Pre-load Dark Theme to avoid flash of unstyled theme -->
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        sky: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-[#070b14] dark:text-slate-100 min-h-screen flex flex-col antialiased selection:bg-sky-500 selection:text-white">
+
+    <!-- Ambient Glowing Accents -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-sky-500/10 dark:bg-sky-500/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+    <div class="fixed top-1/3 right-10 w-96 h-96 bg-emerald-500/10 dark:bg-emerald-500/5 rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+    <!-- Navigation Bar -->
+    <header id="main-navbar" class="sticky top-0 z-50 transition-all duration-300 bg-white/80 dark:bg-[#070b14]/80 glass-nav border-b border-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            
+            <!-- Brand / Logo -->
+            <a href="{{ url_for('main.index') }}" class="flex items-center gap-2 group">
+                <div class="w-9 h-9 rounded-lg bg-sky-600 dark:bg-sky-500 text-white flex items-center justify-center font-mono font-bold text-base shadow-sm group-hover:scale-105 transition-transform">
+                    RK
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-slate-900 dark:text-white tracking-tight leading-none group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+                        Rami Khaled
+                    </span>
+                    <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono leading-tight">
+                        ENP • Cycle Prépa
+                    </span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-1 text-sm font-medium text-slate-600 dark:text-slate-300">
+                <a href="{{ url_for('main.index') }}" class="px-3 py-1.5 rounded-md hover:text-sky-600 dark:hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">Home</a>
+                <a href="{{ url_for('main.index') }}#about" class="px-3 py-1.5 rounded-md hover:text-sky-600 dark:hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">About</a>
+                <a href="{{ url_for('main.index') }}#education" class="px-3 py-1.5 rounded-md hover:text-sky-600 dark:hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">Education</a>
+                <a href="{{ url_for('main.index') }}#skills" class="px-3 py-1.5 rounded-md hover:text-sky-600 dark:hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">Skills</a>
+                <a href="{{ url_for('projects.list_projects') }}" class="px-3 py-1.5 rounded-md hover:text-sky-600 dark:hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">Projects</a>
+                <a href="{{ url_for('main.index') }}#journey" class="px-3 py-1.5 rounded-md hover:text-sky-600 dark:hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">Journey</a>
+                <a href="{{ url_for('main.index') }}#certificates" class="px-3 py-1.5 rounded-md hover:text-sky-600 dark:hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">Certificates</a>
+                <a href="{{ url_for('main.index') }}#contact" class="px-3 py-1.5 rounded-md hover:text-sky-600 dark:hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">Contact</a>
+            </nav>
+
+            <!-- Right Controls: Theme Toggle, Admin & Contact CTA -->
+            <div class="flex items-center gap-2">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" type="button" aria-label="Toggle Dark Mode" class="p-2 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                    <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+                    <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+                </button>
+
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('admin.dashboard') }}" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-md bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/30 hover:bg-amber-500/20 transition-colors">
+                    <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+                    Admin
+                    {% if unread_messages_count > 0 %}
+                    <span class="inline-flex items-center justify-center px-1.5 py-0.5 text-[10px] font-bold leading-none text-white bg-red-600 rounded-full">
+                        {{ unread_messages_count }}
+                    </span>
+                    {% endif %}
+                </a>
+                {% endif %}
+
+                <!-- Contact CTA Button -->
+                <a href="{{ url_for('main.index') }}#contact" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-lg bg-sky-600 hover:bg-sky-500 text-white shadow-sm transition-all hover:scale-[1.02]">
+                    <span>Get in touch</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+
+                <!-- Mobile Menu Hamburger -->
+                <button id="mobile-menu-btn" type="button" aria-label="Open Navigation Menu" class="md:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm">
+        <div class="fixed right-0 top-0 bottom-0 w-72 bg-white dark:bg-[#0c1220] p-6 shadow-2xl flex flex-col justify-between border-l border-slate-200 dark:border-slate-800">
+            <div>
+                <div class="flex items-center justify-between pb-6 border-b border-slate-200 dark:border-slate-800">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg bg-sky-600 text-white flex items-center justify-center font-mono font-bold text-sm">
+                            RK
+                        </div>
+                        <span class="font-bold text-slate-900 dark:text-white">Rami Khaled</span>
+                    </div>
+                    <button id="mobile-menu-close" type="button" aria-label="Close Menu" class="p-2 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-white">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+
+                <nav class="mt-6 flex flex-col gap-2 font-medium text-slate-700 dark:text-slate-200">
+                    <a href="{{ url_for('main.index') }}" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Home</a>
+                    <a href="{{ url_for('main.index') }}#about" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">About Me</a>
+                    <a href="{{ url_for('main.index') }}#education" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Academic Journey</a>
+                    <a href="{{ url_for('main.index') }}#skills" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Technical Skills</a>
+                    <a href="{{ url_for('projects.list_projects') }}" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Projects Showcase</a>
+                    <a href="{{ url_for('main.index') }}#journey" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Learning Roadmap</a>
+                    <a href="{{ url_for('main.index') }}#certificates" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Certificates</a>
+                    <a href="{{ url_for('main.index') }}#contact" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Contact</a>
+
+                    {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('admin.dashboard') }}" class="px-3 py-2 rounded-lg bg-amber-500/10 text-amber-700 dark:text-amber-300 font-semibold mt-2">
+                        Admin Dashboard
+                    </a>
+                    {% endif %}
+                </nav>
+            </div>
+
+            <div class="pt-6 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <button id="theme-toggle-mobile" type="button" class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
+                    <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+                    <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+                    <span>Toggle Theme</span>
+                </button>
+                <div class="flex items-center gap-3 text-slate-500">
+                    <a href="{{ github_url }}" target="_blank" rel="noopener" aria-label="GitHub"><i data-lucide="github" class="w-4 h-4"></i></a>
+                    <a href="{{ linkedin_url }}" target="_blank" rel="noopener" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flash Messages -->
+    <div class="max-w-4xl mx-auto px-4 mt-4 w-full">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-alert flex items-center justify-between p-4 mb-3 rounded-xl text-sm transition-all shadow-sm
+                        {% if category == 'success' %}
+                            bg-emerald-50 text-emerald-900 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-200 dark:border-emerald-800
+                        {% elif category == 'error' %}
+                            bg-red-50 text-red-900 border border-red-200 dark:bg-red-950/40 dark:text-red-200 dark:border-red-800
+                        {% else %}
+                            bg-sky-50 text-sky-900 border border-sky-200 dark:bg-sky-950/40 dark:text-sky-200 dark:border-sky-800
+                        {% endif %}">
+                        <div class="flex items-center gap-2">
+                            {% if category == 'success' %}
+                                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i>
+                            {% elif category == 'error' %}
+                                <i data-lucide="alert-circle" class="w-4 h-4 text-red-600 dark:text-red-400"></i>
+                            {% else %}
+                                <i data-lucide="info" class="w-4 h-4 text-sky-600 dark:text-sky-400"></i>
+                            {% endif %}
+                            <span>{{ message }}</span>
+                        </div>
+                        <button type="button" class="alert-close text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
+                            <i data-lucide="x" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Main Content Block -->
+    <main class="flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Universal Footer -->
+    <footer class="mt-24 border-t border-slate-200/80 dark:border-slate-800/80 bg-white/50 dark:bg-[#060a12]/50 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="w-8 h-8 rounded-lg bg-sky-600 text-white flex items-center justify-center font-mono font-bold text-sm">
+                            RK
+                        </div>
+                        <span class="font-bold text-slate-900 dark:text-white text-lg">Rami Khaled</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm max-w-md leading-relaxed mb-4">
+                        "Building, learning, and exploring what's next."
+                    </p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">
+                        First-Year Engineering Student at <strong>École Nationale Polytechnique d'Alger (ENP)</strong>.
+                        Background in Technique Mathématiques (Génie Électrique) from Souk El Tennine, Algeria.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-4 font-mono">
+                        Navigation
+                    </h3>
+                    <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+                        <li><a href="{{ url_for('main.index') }}" class="hover:text-sky-600 dark:hover:text-sky-400">Home</a></li>
+                        <li><a href="{{ url_for('main.index') }}#about" class="hover:text-sky-600 dark:hover:text-sky-400">About Story</a></li>
+                        <li><a href="{{ url_for('main.index') }}#education" class="hover:text-sky-600 dark:hover:text-sky-400">Academic Journey</a></li>
+                        <li><a href="{{ url_for('projects.list_projects') }}" class="hover:text-sky-600 dark:hover:text-sky-400">Project Case Studies</a></li>
+                        <li><a href="{{ url_for('main.index') }}#certificates" class="hover:text-sky-600 dark:hover:text-sky-400">Certifications</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-4 font-mono">
+                        Connect
+                    </h3>
+                    <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+                        <li>
+                            <a href="{{ github_url }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 hover:text-sky-600 dark:hover:text-sky-400">
+                                <i data-lucide="github" class="w-4 h-4"></i> GitHub
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ linkedin_url }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 hover:text-sky-600 dark:hover:text-sky-400">
+                                <i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:{{ contact_email }}" class="inline-flex items-center gap-2 hover:text-sky-600 dark:hover:text-sky-400">
+                                <i data-lucide="mail" class="w-4 h-4"></i> {{ contact_email }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-200 dark:border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+                <p>© {{ current_year }} Rami Khaled. All rights reserved.</p>
+                <div class="flex items-center gap-4">
+                    <span>Souk El Tennine / Algiers, Algeria</span>
+                    <span>•</span>
+                    <a href="{{ url_for('auth.login') }}" class="hover:underline">Admin Login</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript File -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

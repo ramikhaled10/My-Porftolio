@@ -1,0 +1,68 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}Manage Certificates | Portfolio Admin{% endblock %}
+
+{% block admin_content %}
+<div class="space-y-6">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+            <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
+                Certifications & Coursework
+            </h1>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                Manage verified certificates (Angela Yu Bootcamp, IBM Coursera, etc.)
+            </p>
+        </div>
+        <a href="{{ url_for('admin.certificate_new') }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold shadow-sm transition-all">
+            <i data-lucide="plus" class="w-4 h-4"></i> Add Certificate
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {% for cert in certificates %}
+        <div class="p-5 rounded-2xl bg-white dark:bg-[#0d1424] border border-slate-200 dark:border-slate-800 flex flex-col justify-between shadow-sm">
+            <div>
+                <div class="flex items-start justify-between gap-3 mb-2">
+                    <div>
+                        <span class="text-xs font-mono text-sky-600 dark:text-sky-400 block">{{ cert.issuer }}</span>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-base">{{ cert.title }}</h3>
+                    </div>
+                    <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+                        {{ cert.issue_date }}
+                    </span>
+                </div>
+                <p class="text-xs text-slate-600 dark:text-slate-300 mb-3">{{ cert.description }}</p>
+                {% if cert.skills_list %}
+                <div class="flex flex-wrap gap-1 mb-3">
+                    {% for s in cert.skills_list %}
+                    <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+                        {{ s }}
+                    </span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs">
+                <span class="text-[11px] text-slate-400 font-mono">Order: {{ cert.order_num }}</span>
+                <div class="flex items-center gap-2">
+                    <a href="{{ url_for('admin.certificate_edit', id=cert.id) }}" class="p-1 text-slate-400 hover:text-sky-600">
+                        <i data-lucide="edit-2" class="w-4 h-4"></i>
+                    </a>
+                    <form method="POST" action="{{ url_for('admin.certificate_delete', id=cert.id) }}" class="delete-form inline">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="p-1 text-slate-400 hover:text-red-600">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-span-2 text-center py-8 text-slate-500 text-xs">
+            No certificates added yet.
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

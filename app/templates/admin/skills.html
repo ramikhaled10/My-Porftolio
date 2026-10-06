@@ -1,0 +1,85 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}Manage Skills | Portfolio Admin{% endblock %}
+
+{% block admin_content %}
+<div class="space-y-8">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+            <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
+                Skills & Technical Stacks
+            </h1>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                Manage skill categories and proficiency levels (Comfortable, Familiar, Developing, Exploring).
+            </p>
+        </div>
+        <div class="flex items-center gap-2">
+            <a href="{{ url_for('admin.skill_new') }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold shadow-sm transition-all">
+                <i data-lucide="plus" class="w-4 h-4"></i> Add Skill
+            </a>
+        </div>
+    </div>
+
+    <!-- Category creation card -->
+    <div class="p-6 rounded-2xl bg-white dark:bg-[#0d1424] border border-slate-200 dark:border-slate-800 shadow-sm">
+        <h2 class="text-sm font-bold text-slate-900 dark:text-white mb-3">Add New Skill Category</h2>
+        <form method="POST" action="{{ url_for('admin.category_new') }}" class="flex flex-col sm:flex-row gap-3 items-center">
+            {{ category_form.hidden_tag() }}
+            <div class="w-full sm:w-1/2">
+                {{ category_form.name(class="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500", placeholder="Category name (e.g. Cloud & DevOps)") }}
+            </div>
+            <div class="w-full sm:w-1/4">
+                {{ category_form.icon(class="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500", placeholder="Lucide icon name (e.g. cloud)") }}
+            </div>
+            <button type="submit" class="w-full sm:w-auto px-4 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl text-xs font-semibold flex-shrink-0">
+                Create Category
+            </button>
+        </form>
+    </div>
+
+    <!-- Categories & Skills list -->
+    <div class="space-y-6">
+        {% for cat in categories %}
+        <div class="rounded-2xl bg-white dark:bg-[#0d1424] border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800 mb-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center">
+                        <i data-lucide="{{ cat.icon or 'code-2' }}" class="w-4 h-4"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 dark:text-white text-base">{{ cat.name }}</h3>
+                    <span class="text-xs text-slate-400">({{ cat.skills|length }} skills)</span>
+                </div>
+                <form method="POST" action="{{ url_for('admin.category_delete', id=cat.id) }}" class="delete-form inline">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="text-xs text-red-500 hover:text-red-700 font-medium">Delete Category</button>
+                </form>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                {% for skill in cat.skills %}
+                <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/60 dark:border-slate-800 flex items-center justify-between text-xs">
+                    <div>
+                        <span class="font-bold text-slate-900 dark:text-white block">{{ skill.name }}</span>
+                        <span class="text-[10px] font-mono text-slate-500">{{ skill.level }}</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <a href="{{ url_for('admin.skill_edit', id=skill.id) }}" class="p-1 text-slate-400 hover:text-sky-600">
+                            <i data-lucide="edit-2" class="w-3.5 h-3.5"></i>
+                        </a>
+                        <form method="POST" action="{{ url_for('admin.skill_delete', id=skill.id) }}" class="delete-form inline">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="p-1 text-slate-400 hover:text-red-600">
+                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                {% else %}
+                <p class="text-xs text-slate-500 col-span-3">No skills in this category.</p>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}500 - Server Error | Rami Khaled{% endblock %}
+
+{% block content %}
+<div class="min-h-[70vh] flex items-center justify-center px-4 py-16 text-center">
+    <div class="max-w-md rounded-2xl glass-panel p-8 border border-slate-200/80 dark:border-slate-800 shadow-xl">
+        <span class="text-5xl font-mono font-extrabold text-rose-600 dark:text-rose-400 block mb-3">500</span>
+        <h1 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Internal Server Error</h1>
+        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+            An unexpected error occurred while processing your request. Please try again later.
+        </p>
+        <a href="{{ url_for('main.index') }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold shadow-sm transition-all">
+            <i data-lucide="home" class="w-4 h-4"></i> Back to Homepage
+        </a>
+    </div>
+</div>
+{% endblock %}

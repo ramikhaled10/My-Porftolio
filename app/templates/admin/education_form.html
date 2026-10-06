@@ -1,0 +1,85 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}{{ title }} | Portfolio Admin{% endblock %}
+
+{% block admin_content %}
+<div class="max-w-2xl mx-auto space-y-6">
+    <div>
+        <a href="{{ url_for('admin.education') }}" class="text-xs text-slate-500 hover:text-sky-600 font-mono inline-flex items-center gap-1 mb-2">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to Education
+        </a>
+        <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
+            {{ title }}
+        </h1>
+    </div>
+
+    <form method="POST" class="rounded-2xl bg-white dark:bg-[#0d1424] p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+        {{ form.hidden_tag() }}
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label for="degree" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1 font-mono">
+                    Degree / Track <span class="text-red-500">*</span>
+                </label>
+                {{ form.degree(id="degree", class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500") }}
+            </div>
+
+            <div>
+                <label for="institution" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1 font-mono">
+                    Institution <span class="text-red-500">*</span>
+                </label>
+                {{ form.institution(id="institution", class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500") }}
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+                <label for="location" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1 font-mono">
+                    Location
+                </label>
+                {{ form.location(id="location", class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500") }}
+            </div>
+
+            <div>
+                <label for="start_year" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1 font-mono">
+                    Start Year
+                </label>
+                {{ form.start_year(id="start_year", class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500") }}
+            </div>
+
+            <div>
+                <label for="end_year" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1 font-mono">
+                    End Year
+                </label>
+                {{ form.end_year(id="end_year", class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500") }}
+            </div>
+        </div>
+
+        <div>
+            <label for="grade" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1 font-mono">
+                Grade / Score (e.g. 17.80 / 20)
+            </label>
+            {{ form.grade(id="grade", class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white font-mono focus:outline-none focus:ring-2 focus:ring-sky-500") }}
+        </div>
+
+        <div>
+            <label for="highlights" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1 font-mono">
+                Subject Highlights (separated by | character)
+            </label>
+            {{ form.highlights(id="highlights", class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white font-mono focus:outline-none focus:ring-2 focus:ring-sky-500", placeholder="Mathematics: 18 / 20 | Physics: 19.5 / 20 | Electrical Engineering: 19.5 / 20") }}
+        </div>
+
+        <div>
+            <label for="description" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1 font-mono">
+                Description / Narrative
+            </label>
+            {{ form.description(id="description", rows="3", class="w-full px-4 py-2 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500") }}
+        </div>
+
+        <div class="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-end gap-3">
+            <a href="{{ url_for('admin.education') }}" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-500">Cancel</a>
+            <button type="submit" class="px-6 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold shadow-sm transition-all">Save Education</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
