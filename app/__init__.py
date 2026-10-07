@@ -65,3 +65,9 @@ def create_app(config_name=None):
         }
 
     return app
+
+
+def __getattr__(name):
+    if name == 'app':
+        return create_app(os.getenv('FLASK_ENV', 'production'))
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
