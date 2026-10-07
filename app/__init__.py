@@ -64,6 +64,18 @@ def create_app(config_name=None):
             'profile_image': SiteSetting.get('profile_image', 'images/rami_portrait.jpg')
         }
 
+    # Automatically ensure database tables and initial data exist
+    if config_name != 'testing':
+        with app.app_context():
+            try:
+                db.create_all()
+                from app.models import SiteSetting
+                if SiteSetting.query.first() is None:
+                    from seed import seed_database
+                    seed_database(app)
+            except Exception as e:
+                app.logger.warning(f"Database auto-init notice: {e}")
+
     return app
 
 

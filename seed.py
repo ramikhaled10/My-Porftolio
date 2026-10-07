@@ -13,11 +13,10 @@ from app.models import (
     Certification, SiteSetting
 )
 
-app = create_app(os.getenv('FLASK_ENV', 'development'))
-
-
-def seed_database():
-    with app.app_context():
+def seed_database(target_app=None):
+    if target_app is None:
+        target_app = create_app(os.getenv('FLASK_ENV', 'development'))
+    with target_app.app_context():
         print("Starting database seeding...")
         db.create_all()
 
