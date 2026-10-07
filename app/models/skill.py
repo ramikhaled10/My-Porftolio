@@ -27,7 +27,7 @@ class Skill(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey('skill_categories.id', ondelete='CASCADE'), nullable=False)
-    # Levels: "Comfortable", "Familiar", "Developing", "Exploring"
+    # Levels: Foundation, Developing, Familiar, Exploring
     level = db.Column(db.String(32), nullable=False, default='Familiar')
     description = db.Column(db.String(255), nullable=True)
     order_num = db.Column(db.Integer, default=0)

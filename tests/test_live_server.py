@@ -1,67 +1,85 @@
+import os
+import socket
 import urllib.request
 import urllib.parse
 import http.cookiejar
 import re
+import pytest
 
-cj = http.cookiejar.CookieJar()
-opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
 
-# 1. Fetch login page
-login_page = opener.open('http://127.0.0.1:5000/auth/login').read().decode()
-csrf_match = re.search(r'name="csrf_token"[^>]*value="([^"]+)"', login_page)
-csrf_token = csrf_match.group(1) if csrf_match else ''
-print(f'Extracted CSRF token: {csrf_token[:15]}...')
+def is_live_server_running(host="127.0.0.1", port=5000):
+    try:
+        with socket.create_connection((host, port), timeout=0.5):
+            return True
+    except OSError:
+        return False
 
-# 2. Authenticate
-login_data = urllib.parse.urlencode({
-    'csrf_token': csrf_token,
-    'username': 'rami',
-    'password': 'AdminRami2026!'
-}).encode()
 
-login_req = urllib.request.Request(
-    'http://127.0.0.1:5000/auth/login',
-    data=login_data,
-    headers={
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Referer': 'http://127.0.0.1:5000/auth/login'
-    }
+RUN_LIVE = os.environ.get("RUN_LIVE_TESTS") == "1"
+
+
+@pytest.mark.skipif(
+    not (RUN_LIVE and is_live_server_running()),
+    reason="Live server tests require RUN_LIVE_TESTS=1 and a server running on 127.0.0.1:5000"
 )
-resp = opener.open(login_req)
+def test_live_server_smoke():
+    cj = http.cookiejar.CookieJar()
+    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
 
-admin_routes = [
-    '/admin/',
-    '/admin/projects',
-    '/admin/certificates',
-    '/admin/education',
-    '/admin/skills',
-    '/admin/messages',
-    '/admin/settings'
-]
+    # 1. Fetch login page with explicit timeout
+    login_page = opener.open('http://127.0.0.1:5000/auth/login', timeout=3).read().decode()
+    csrf_match = re.search(r'name="csrf_token"[^>]*value="([^"]+)"', login_page)
+    csrf_token = csrf_match.group(1) if csrf_match else ''
 
-for r in admin_routes:
-    req = opener.open(f'http://127.0.0.1:5000{r}')
-    print(f'Admin {r} -> {req.status}')
+    # 2. Authenticate
+    login_data = urllib.parse.urlencode({
+        'csrf_token': csrf_token,
+        'username': 'rami',
+        'password': 'AdminRami2026!'
+    }).encode()
 
-# 3. Test Contact Form Submission on Homepage
-home_page = opener.open('http://127.0.0.1:5000/').read().decode()
-home_csrf_match = re.search(r'name="csrf_token"[^>]*value="([^"]+)"', home_page)
-home_csrf = home_csrf_match.group(1) if home_csrf_match else ''
+    login_req = urllib.request.Request(
+        'http://127.0.0.1:5000/auth/login',
+        data=login_data,
+        headers={
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Referer': 'http://127.0.0.1:5000/auth/login'
+        }
+    )
+    resp = opener.open(login_req, timeout=3)
+    assert resp.status == 200
 
-contact_data = urllib.parse.urlencode({
-    'csrf_token': home_csrf,
-    'name': 'Admissions Officer',
-    'email': 'admissions@oxford.edu',
-    'subject': 'Graduate Scholarship & Admissions Review',
-    'message': 'Dear Rami, we reviewed your Algerian Baccalaureate credentials and Python development trajectory.'
-}).encode()
+    admin_routes = [
+        '/admin/',
+        '/admin/certificates',
+        '/admin/education',
+        '/admin/skills',
+        '/admin/messages',
+        '/admin/settings'
+    ]
 
-contact_req = urllib.request.Request(
-    'http://127.0.0.1:5000/',
-    data=contact_data,
-    headers={'Content-Type': 'application/x-www-form-urlencoded', 'Referer': 'http://127.0.0.1:5000/'}
-)
-contact_resp = opener.open(contact_req)
-print(f'Contact form submission -> {contact_resp.status}')
+    public_routes = [
+        '/',
+        '/about',
+        '/education',
+        '/skills',
+        '/learning',
+        '/vision',
+        '/certificates',
+        '/contact',
+    ]
+    for r in public_routes:
+        req = opener.open(f'http://127.0.0.1:5000{r}', timeout=3)
+        assert req.status == 200
 
-print('All admin and live tests verified successfully!')
+    for r in admin_routes:
+        req = opener.open(f'http://127.0.0.1:5000{r}', timeout=3)
+        assert req.status == 200
+
+
+if __name__ == '__main__':
+    if is_live_server_running():
+        test_live_server_smoke()
+        print("Live smoke test passed!")
+    else:
+        print("Server is not running on 127.0.0.1:5000")

@@ -1,11 +1,9 @@
 // Rami Khaled Portfolio - Main JavaScript
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Initialize Lucide Icons
     if (window.lucide) {
         lucide.createIcons();
     }
 
-    // 2. Dark / Light Mode Toggle
     const themeToggleBtn = document.getElementById('theme-toggle');
     const themeToggleMobileBtn = document.getElementById('theme-toggle-mobile');
 
@@ -24,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggleMobileBtn.addEventListener('click', toggleTheme);
     }
 
-    // 3. Mobile Navigation Menu
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileMenuCloseBtn = document.getElementById('mobile-menu-close');
@@ -48,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileMenuCloseBtn.addEventListener('click', toggleMobileMenu);
     }
 
-    // Close mobile menu on clicking any link
     if (mobileMenu) {
         mobileMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
@@ -58,57 +54,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. Project Category Filtering (Homepage & Projects gallery)
-    const filterButtons = document.querySelectorAll('.project-filter-btn');
-    const projectCards = document.querySelectorAll('.project-item');
-
-    if (filterButtons.length > 0 && projectCards.length > 0) {
-        filterButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const category = btn.getAttribute('data-category');
-
-                // Update active button state
-                filterButtons.forEach(b => {
-                    b.classList.remove('active-filter', 'bg-sky-600', 'text-white', 'dark:bg-sky-500');
-                    b.classList.add('text-slate-600', 'dark:text-slate-300', 'bg-slate-100', 'dark:bg-slate-800');
-                });
-                btn.classList.add('active-filter', 'bg-sky-600', 'text-white', 'dark:bg-sky-500');
-                btn.classList.remove('text-slate-600', 'dark:text-slate-300', 'bg-slate-100', 'dark:bg-slate-800');
-
-                // Filter cards with smooth opacity transition
-                projectCards.forEach(card => {
-                    const cardCategory = card.getAttribute('data-category');
-                    if (category === 'all' || cardCategory === category) {
-                        card.style.display = 'flex';
-                        setTimeout(() => {
-                            card.style.opacity = '1';
-                            card.style.transform = 'translateY(0)';
-                        }, 20);
-                    } else {
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(10px)';
-                        setTimeout(() => {
-                            card.style.display = 'none';
-                        }, 200);
-                    }
-                });
-            });
-        });
-    }
-
-    // 5. Sticky Navbar Shadow Transition on Scroll
     const navbar = document.getElementById('main-navbar');
     if (navbar) {
         window.addEventListener('scroll', () => {
             if (window.scrollY > 20) {
-                navbar.classList.add('shadow-md', 'border-b', 'border-slate-200/80', 'dark:border-slate-800/80');
+                navbar.style.boxShadow = 'var(--shadow-md)';
             } else {
-                navbar.classList.remove('shadow-md', 'border-b', 'border-slate-200/80', 'dark:border-slate-800/80');
+                navbar.style.boxShadow = 'none';
             }
         });
     }
 
-    // 6. Flash Alert Auto Dismiss
     const flashAlerts = document.querySelectorAll('.flash-alert');
     flashAlerts.forEach(alert => {
         const closeBtn = alert.querySelector('.alert-close');
@@ -121,7 +77,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 6000);
     });
 
-    // 7. Clipboard Copy Helper (for email or code)
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealEls = document.querySelectorAll('.reveal');
+    if (prefersReduced) {
+        revealEls.forEach(el => el.classList.add('revealed'));
+    } else if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        revealEls.forEach(el => observer.observe(el));
+    } else {
+        revealEls.forEach(el => el.classList.add('revealed'));
+    }
+
     window.copyToClipboard = function(text, elementId) {
         navigator.clipboard.writeText(text).then(() => {
             const el = document.getElementById(elementId);

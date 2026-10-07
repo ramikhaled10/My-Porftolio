@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Learning | Rami Khaled{% endblock %}
+{% block meta_description %}How Rami Khaled's learning is evolving: Python foundations, current Flutter and Coursera study, and a next step toward AI-powered applications.{% endblock %}
+
+{% block content %}
+<div class="page-enter max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <header class="mb-12">
+        <span class="section-label">Learning</span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mt-4 mb-4" style="color: var(--text);">
+            What I'm Learning
+        </h1>
+        <p class="text-lg leading-relaxed" style="color: var(--text-secondary);">
+            A simple overview of what I learned in the past, what I'm studying right now, and what I want to learn next.
+        </p>
+    </header>
+
+    <div class="space-y-8">
+        <section class="glass-panel p-6 sm:p-8 reveal">
+            <p class="text-xs font-mono uppercase tracking-wider mb-2" style="color: var(--primary);">Past • Foundations</p>
+            <h2 class="text-xl font-bold mb-3" style="color: var(--text);">Starting with Python as a Foundation</h2>
+            <p class="leading-relaxed mb-4" style="color: var(--text-secondary);">
+                I started Angela Yu's <strong style="color: var(--text);">100 Days of Code Python</strong> as a <strong style="color: var(--text);">foundation</strong> for programming.
+                My goal was not simply to become a Python developer, but to build strong software fundamentals before going deeper into AI.
+            </p>
+            <p class="leading-relaxed mb-4" style="color: var(--text-secondary);">
+                Through this journey, I explored Python, Object-Oriented Programming (OOP), APIs, automation, web development, Flask, databases, Selenium, GUI development, data processing, and visualization.
+            </p>
+            <div class="flex flex-wrap gap-2">
+                {% for tag in ['Python & OOP', 'APIs & Automation', 'Web Development & Flask', 'Databases', 'Selenium', 'GUI Development', 'Data Processing & Visualization'] %}
+                <span class="text-xs px-3 py-1 rounded-full font-medium" style="background: var(--primary-subtle); color: var(--primary);">{{ tag }}</span>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="glass-panel p-6 sm:p-8 reveal" style="border-color: var(--border-hover);">
+            <p class="text-xs font-mono uppercase tracking-wider mb-2" style="color: var(--primary);">Current • Active Exploration</p>
+            <h2 class="text-xl font-bold mb-3" style="color: var(--text);">Mobile Apps with Flutter & Online Coursework</h2>
+            <p class="leading-relaxed mb-4" style="color: var(--text-secondary);">
+                I am currently learning <strong style="color: var(--text);">Flutter and Dart</strong> for mobile development because I want to build apps that run smoothly on real phones and that people can actually use every day.
+            </p>
+            <p class="leading-relaxed" style="color: var(--text-secondary);">
+                At the same time, I am taking an online course from <strong style="color: var(--text);">EDUCBA through Coursera</strong> to keep expanding my technical knowledge alongside my university studies at ENP.
+            </p>
+        </section>
+
+        <section class="glass-panel p-6 sm:p-8 reveal">
+            <p class="text-xs font-mono uppercase tracking-wider mb-2" style="color: var(--primary);">Next • Future Direction</p>
+            <h2 class="text-xl font-bold mb-3" style="color: var(--text);">Getting into AI and Building Real Apps</h2>
+            <p class="leading-relaxed mb-4" style="color: var(--text-secondary);">
+                Next, I want to learn more about Artificial Intelligence and machine learning, and figure out how to add smart features to mobile and web apps.
+            </p>
+            <p class="leading-relaxed mb-6" style="color: var(--text-secondary);">
+                My goal is to combine <strong style="color: var(--text);">Python + AI + Flutter</strong> into complete, working applications. I don't claim to know everything yet — this is simply the direction I am working toward.
+            </p>
+            <div class="space-y-0 font-mono text-sm">
+                {% for line in ['1. Python & software fundamentals', '2. Artificial Intelligence (AI)', '3. Flutter & mobile apps', '4. AI-powered applications', '5. Useful products solving real problems'] %}
+                <div>
+                    <div class="px-4 py-2.5 rounded-lg" style="background: var(--primary-subtle); color: var(--text);">{{ line }}</div>
+                    {% if not loop.last %}
+                    <div class="flow-connector text-xs">↓</div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

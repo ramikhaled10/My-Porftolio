@@ -18,9 +18,8 @@ def create_app(config_name=None):
     csrf.init_app(app)
 
     # Register Blueprints
-    from app.routes import main_bp, projects_bp, auth_bp, admin_bp, api_bp
+    from app.routes import main_bp, auth_bp, admin_bp, api_bp
     app.register_blueprint(main_bp)
-    app.register_blueprint(projects_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(admin_bp)
     app.register_blueprint(api_bp)
@@ -53,13 +52,16 @@ def create_app(config_name=None):
 
         return {
             'site_author': 'Rami Khaled',
+            'author_age': 18,
             'current_year': 2026,
-            'current_location': 'Souk El Tennine / Algiers, Algeria',
+            'current_location': 'Souk El Tennine & Algiers, Algeria',
             'current_institution': "École Nationale Polytechnique d'Alger (ENP)",
             'unread_messages_count': unread_count,
-            'github_url': SiteSetting.get('github_url', 'https://github.com/ramikhaled'),
-            'linkedin_url': SiteSetting.get('linkedin_url', 'https://linkedin.com/in/rami-khaled'),
-            'contact_email': SiteSetting.get('contact_email', 'rami.khaled@example.dz')
+            'github_url': SiteSetting.get('github_url', ''),
+            'linkedin_url': SiteSetting.get('linkedin_url', ''),
+            'instagram_url': SiteSetting.get('instagram_url', 'https://www.instagram.com/ramikld10/'),
+            'contact_email': SiteSetting.get('contact_email', 'ramikld01@gmail.com'),
+            'profile_image': SiteSetting.get('profile_image', 'images/rami_portrait.jpg')
         }
 
     return app

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Education | Rami Khaled{% endblock %}
+{% block meta_description %}Academic journey of Rami Khaled: Souk El Tennine, BEM, Baccalaureate Technique Mathématiques, and first-year engineering at ENP Algiers.{% endblock %}
+
+{% block content %}
+<div class="page-enter max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <header class="mb-12">
+        <span class="section-label">Education</span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mt-4 mb-4" style="color: var(--text);">
+            My Education
+        </h1>
+        <p class="text-lg leading-relaxed" style="color: var(--text-secondary);">
+            My school journey from Souk El Tennine to École Nationale Polytechnique d'Alger (ENP).
+        </p>
+    </header>
+
+    <div class="relative pl-2">
+        <div class="timeline-stem"></div>
+        {% for edu in education_list %}
+        <article class="relative pl-12 pb-12 reveal">
+            <span class="timeline-dot absolute" style="left: 14px; top: 6px;"></span>
+            <p class="text-xs font-mono mb-1" style="color: var(--primary);">
+                {{ edu.start_year }}{% if edu.end_year %} — {{ edu.end_year }}{% endif %}
+            </p>
+            <h2 class="text-xl font-bold" style="color: var(--text);">{{ edu.institution }}</h2>
+            <p class="text-sm font-medium mt-1" style="color: var(--text-secondary);">{{ edu.degree }}</p>
+            {% if edu.location %}
+            <p class="text-xs mt-1" style="color: var(--muted);">{{ edu.location }}</p>
+            {% endif %}
+            {% if edu.grade %}
+            <p class="mt-3 inline-flex items-center gap-2 text-sm font-mono font-semibold px-3 py-1 rounded-full"
+               style="background: var(--primary-subtle); color: var(--primary);">
+                {{ edu.grade }}
+            </p>
+            {% endif %}
+            {% if edu.description %}
+            <p class="mt-3 text-sm leading-relaxed" style="color: var(--text-secondary);">{{ edu.description }}</p>
+            {% endif %}
+            {% if edu.highlights %}
+            <div class="mt-4 flex flex-wrap gap-2">
+                {% for h in edu.highlights.split('|') %}
+                <span class="inline-flex items-center gap-1.5 text-xs font-mono font-medium px-3 py-1.5 rounded-lg"
+                      style="background: var(--surface-elevated); color: var(--text); border: 1px solid var(--border);">
+                    <span class="w-1.5 h-1.5 rounded-full" style="background: var(--primary);"></span>
+                    {{ h.strip() }}
+                </span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </article>
+        {% else %}
+        <p class="pl-12 text-sm" style="color: var(--muted);">Education records will appear here once they are added in the admin dashboard.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

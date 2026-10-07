@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Skills | Rami Khaled{% endblock %}
+{% block meta_description %}Skills of Rami Khaled across programming, backend, mobile, Python, and core software concepts — labeled as Foundation, Developing, Familiar, or Exploring.{% endblock %}
+
+{% block content %}
+<div class="page-enter max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <header class="mb-10 max-w-3xl">
+        <span class="section-label">Skills</span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mt-4 mb-4" style="color: var(--text);">
+            Skills & Tools
+        </h1>
+        <p class="text-lg leading-relaxed" style="color: var(--text-secondary);">
+            Here are the programming languages and tools I have worked with so far. I grouped them honestly by how comfortable I am with each one, because I am still learning.
+        </p>
+    </header>
+
+    <div class="flex flex-wrap gap-3 mb-10 text-xs" style="color: var(--text-secondary);">
+        <span class="skill-badge foundation">Foundation</span>
+        <span class="skill-badge developing">Developing</span>
+        <span class="skill-badge familiar">Familiar</span>
+        <span class="skill-badge exploring">Exploring</span>
+    </div>
+
+    {% if skill_categories %}
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {% for cat in skill_categories %}
+        <section class="glass-panel p-6 reveal">
+            <div class="flex items-center gap-3 mb-5">
+                <div class="card-icon w-10 h-10 rounded-lg flex items-center justify-center" style="background: var(--gradient-subtle); color: var(--primary);">
+                    <i data-lucide="{{ cat.icon or 'code-2' }}" class="w-5 h-5"></i>
+                </div>
+                <h2 class="font-bold text-lg" style="color: var(--text);">{{ cat.name }}</h2>
+            </div>
+            <ul class="space-y-4">
+                {% for skill in cat.skills %}
+                <li>
+                    <div class="flex items-center justify-between gap-3">
+                        <span class="font-medium" style="color: var(--text);">{{ skill.name }}</span>
+                        <span class="skill-badge {{ skill.level|lower }}">{{ skill.level }}</span>
+                    </div>
+                    {% if skill.description %}
+                    <p class="text-sm mt-1" style="color: var(--text-secondary);">{{ skill.description }}</p>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-sm" style="color: var(--muted);">Skills will appear here once they are added in the admin dashboard.</p>
+    {% endif %}
+</div>
+{% endblock %}

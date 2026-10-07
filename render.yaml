@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: rami-portfolio
+    runtime: python
+    buildCommand: bash build.sh
+    startCommand: gunicorn run:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: rami-db
+          property: connectionString
+      - key: ADMIN_USERNAME
+        value: rami
+      - key: ADMIN_EMAIL
+        value: rami.khaled@example.dz
+      - key: ADMIN_PASSWORD
+        generateValue: true
+
+databases:
+  - name: rami-db
+    databaseName: rami_portfolio
+    user: rami
+    plan: free

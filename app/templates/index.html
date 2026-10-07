@@ -3,842 +3,144 @@
 {% block title %}Rami Khaled | Engineering Student & Developer{% endblock %}
 
 {% block content %}
-<div class="space-y-24 sm:space-y-32">
+<div class="page-enter">
 
-    <!-- ==================== 1. HERO SECTION ==================== -->
-    <section class="relative pt-12 sm:pt-20 pb-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <!-- Hero -->
+    <section class="relative pt-14 sm:pt-20 pb-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            <!-- Left Hero Content -->
             <div class="lg:col-span-7 space-y-6">
-                
-                <!-- Status Badge -->
-                <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800 shadow-sm">
+                <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full text-xs font-medium"
+                     style="background: var(--primary-subtle); color: var(--primary); border: 1px solid var(--border-hover);">
                     <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style="background: var(--primary-light);"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2" style="background: var(--primary);"></span>
                     </span>
                     <span>{{ status_text }}</span>
                 </div>
 
-                <!-- Main Heading & Title -->
                 <div>
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1]">
+                    <h1 class="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold tracking-tight leading-[1.1]" style="color: var(--text);">
                         Rami Khaled
                     </h1>
-                    <p class="mt-3 text-lg sm:text-xl font-medium text-sky-600 dark:text-sky-400 font-mono">
+                    <p class="mt-3 text-lg sm:text-xl font-medium font-mono" style="color: var(--primary);">
                         {{ site_tagline }}
                     </p>
                 </div>
 
-                <!-- Bio Paragraph -->
-                <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
+                <p class="text-base sm:text-lg leading-relaxed max-w-2xl" style="color: var(--text-secondary);">
                     {{ site_bio }}
                 </p>
 
-                <!-- Action CTAs -->
+                <div class="space-y-3 text-sm leading-relaxed max-w-2xl" style="color: var(--text-secondary);">
+                    <p>
+                        I am an 18-year-old first-year engineering student at <strong style="color: var(--text);">École Nationale Polytechnique d'Alger (ENP)</strong>, originally from Souk El Tennine.
+                    </p>
+                    <p>
+                        I started learning Python to build a strong foundation in programming. My goal wasn't just to write Python code — I wanted to understand how software works so I can go deeper into AI. Right now, I'm also learning Flutter and Dart for mobile apps.
+                    </p>
+                    <p>
+                        I am interested in software, AI, and business, and I want to learn how I can combine them to build useful products that solve real problems.
+                    </p>
+                </div>
+
                 <div class="pt-2 flex flex-wrap items-center gap-3">
-                    <a href="#projects" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-medium text-sm shadow-md hover:shadow-sky-500/20 transition-all hover:scale-[1.02]">
-                        <i data-lucide="layers" class="w-4 h-4"></i>
-                        <span>Explore Projects</span>
+                    <a href="{{ url_for('main.about') }}" class="btn-primary">
+                        <i data-lucide="user" class="w-4 h-4"></i>
+                        <span>About Me</span>
                     </a>
-                    <a href="#education" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white dark:bg-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 font-medium text-sm transition-all hover:scale-[1.02]">
-                        <i data-lucide="graduation-cap" class="w-4 h-4 text-sky-500"></i>
-                        <span>Academic Journey</span>
+                    <a href="{{ url_for('main.vision') }}" class="btn-secondary">
+                        <i data-lucide="eye" class="w-4 h-4" style="color: var(--primary);"></i>
+                        <span>My Goals</span>
                     </a>
-                    <a href="#contact" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white font-medium text-sm transition-colors">
-                        <i data-lucide="mail" class="w-4 h-4"></i>
+                    <a href="{{ url_for('main.contact') }}" class="btn-secondary">
+                        <i data-lucide="mail" class="w-4 h-4" style="color: var(--primary);"></i>
                         <span>Contact Me</span>
                     </a>
                 </div>
 
-                <!-- Quick Location & Stack Badges -->
-                <div class="pt-4 flex flex-wrap items-center gap-y-2 gap-x-4 text-xs text-slate-500 dark:text-slate-400">
+                <div class="pt-2 flex flex-wrap items-center gap-y-2 gap-x-4 text-xs" style="color: var(--muted);">
                     <span class="inline-flex items-center gap-1.5">
-                        <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-400"></i>
-                        Souk El Tennine & Algiers, Algeria
+                        <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+                        Souk El Tennine • Algiers, Algeria
                     </span>
                     <span class="inline-flex items-center gap-1.5">
-                        <i data-lucide="code" class="w-3.5 h-3.5 text-slate-400"></i>
-                        Python • Flask • Flutter • PostgreSQL
+                        <i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i>
+                        ENP Algiers (Bac 17.80 • BEM 17.43)
+                    </span>
+                    <span class="inline-flex items-center gap-1.5">
+                        <i data-lucide="code" class="w-3.5 h-3.5"></i>
+                        Python • Flutter/Dart • AI (Exploring)
                     </span>
                 </div>
             </div>
 
-            <!-- Right Interactive Code / Terminal Card -->
             <div class="lg:col-span-5">
-                <div class="relative rounded-2xl glass-panel p-5 shadow-2xl border border-slate-200/80 dark:border-slate-800 overflow-hidden font-mono text-xs">
-                    
-                    <!-- Terminal Window Header -->
-                    <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800/80 mb-4">
+                <div class="relative rounded-2xl glass-panel p-3 overflow-hidden" style="box-shadow: var(--shadow-lg);">
+                    <div class="flex items-center justify-between p-2 mb-2" style="border-bottom: 1px solid var(--border);">
                         <div class="flex items-center gap-1.5">
-                            <div class="w-3 h-3 rounded-full bg-red-400/80"></div>
-                            <div class="w-3 h-3 rounded-full bg-amber-400/80"></div>
-                            <div class="w-3 h-3 rounded-full bg-emerald-400/80"></div>
+                            <div class="w-3 h-3 rounded-full" style="background: #f87171;"></div>
+                            <div class="w-3 h-3 rounded-full" style="background: #fbbf24;"></div>
+                            <div class="w-3 h-3 rounded-full" style="background: #34d399;"></div>
                         </div>
-                        <span class="text-[11px] text-slate-400 dark:text-slate-400 font-mono">
-                            rami_profile.py
-                        </span>
-                        <div class="w-4"></div>
+                        <span class="text-[11px] font-mono" style="color: var(--muted);">portrait.exe</span>
                     </div>
-
-                    <!-- Code Snippet -->
-                    <pre class="text-slate-700 dark:text-slate-300 leading-relaxed overflow-x-auto whitespace-pre">
-<span class="text-sky-600 dark:text-sky-400">class</span> <span class="text-amber-600 dark:text-amber-300">EngineeringStudent</span>:
-    <span class="text-sky-600 dark:text-sky-400">def</span> <span class="text-purple-600 dark:text-purple-400">__init__</span>(self):
-        self.name = <span class="text-emerald-600 dark:text-emerald-400">"Rami Khaled"</span>
-        self.institution = <span class="text-emerald-600 dark:text-emerald-400">"ENP Algiers"</span>
-        self.origin = <span class="text-emerald-600 dark:text-emerald-400">"Souk El Tennine, Algeria"</span>
-        self.baccalaureate = {
-            <span class="text-emerald-600 dark:text-emerald-400">"grade"</span>: <span class="text-amber-600 dark:text-amber-400">17.80</span>,
-            <span class="text-emerald-600 dark:text-emerald-400">"track"</span>: <span class="text-emerald-600 dark:text-emerald-400">"Technique Math (Génie Électrique)"</span>,
-            <span class="text-emerald-600 dark:text-emerald-400">"math"</span>: <span class="text-amber-600 dark:text-amber-400">18.0</span>,
-            <span class="text-emerald-600 dark:text-emerald-400">"physics"</span>: <span class="text-amber-600 dark:text-amber-400">19.5</span>,
-            <span class="text-emerald-600 dark:text-emerald-400">"ee"</span>: <span class="text-amber-600 dark:text-amber-400">19.5</span>
-        }
-        self.core_stack = [<span class="text-emerald-600 dark:text-emerald-400">"Python"</span>, <span class="text-emerald-600 dark:text-emerald-400">"Flask"</span>, <span class="text-emerald-600 dark:text-emerald-400">"SQLAlchemy"</span>]
-        self.current_focus = [<span class="text-emerald-600 dark:text-emerald-400">"Flutter"</span>, <span class="text-emerald-600 dark:text-emerald-400">"Dart"</span>, <span class="text-emerald-600 dark:text-emerald-400">"Applied AI"</span>]
-
-    <span class="text-sky-600 dark:text-sky-400">def</span> <span class="text-purple-600 dark:text-purple-400">long_term_goal</span>(self):
-        <span class="text-slate-400 italic"># Bridge backend intelligence with mobile UI</span>
-        <span class="text-sky-600 dark:text-sky-400">return</span> <span class="text-emerald-600 dark:text-emerald-400">"Python + AI + Flutter"</span></pre>
+                    <div class="relative aspect-[4/5] rounded-xl overflow-hidden" style="background: var(--gradient-subtle);">
+                        <img src="{{ url_for('static', filename=profile_image) }}"
+                             alt="Portrait of Rami Khaled"
+                             class="w-full h-full object-cover object-top"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="hidden w-full h-full items-center justify-center text-4xl font-mono font-bold" style="color: var(--primary);">RK</div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Metric Highlight Bar -->
-        <div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="p-4 rounded-xl glass-panel text-center">
-                <span class="block text-2xl sm:text-3xl font-extrabold text-sky-600 dark:text-sky-400 font-mono">17.80</span>
-                <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Baccalaureate (Mention TB)</span>
-            </div>
-            <div class="p-4 rounded-xl glass-panel text-center">
-                <span class="block text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono">17.43</span>
-                <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">BEM (Math: 20/20)</span>
-            </div>
-            <div class="p-4 rounded-xl glass-panel text-center">
-                <span class="block text-2xl sm:text-3xl font-extrabold text-purple-600 dark:text-purple-400 font-mono">ENP</span>
-                <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">First-Year Cycle Préparatoire</span>
-            </div>
-            <div class="p-4 rounded-xl glass-panel text-center">
-                <span class="block text-2xl sm:text-3xl font-extrabold text-amber-600 dark:text-amber-400 font-mono">100 Days</span>
-                <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Python Pro Bootcamp</span>
             </div>
         </div>
     </section>
 
-    <!-- ==================== 2. ACADEMIC JOURNEY SECTION ==================== -->
-    <section id="education" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-20">
-        
-        <div class="text-center max-w-2xl mx-auto mb-14">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 border border-sky-200 dark:border-sky-800 mb-3 font-mono">
-                <i data-lucide="award" class="w-3.5 h-3.5"></i>
-                ACADEMIC FOUNDATION
-            </div>
-            <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
-                Education & Academic Milestones
-            </h2>
-            <p class="mt-2 text-slate-600 dark:text-slate-400 text-sm">
-                A disciplined academic background built in Souk El Tennine and continuing at Algeria's top engineering school.
-            </p>
+    <!-- Explore cards -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div class="section-header reveal">
+            <span class="section-label">Explore</span>
+            <h2>Explore my website</h2>
+            <p>Here is what you will find on each page.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {% for edu in education_list %}
-            <div class="relative rounded-2xl glass-panel p-6 border border-slate-200/80 dark:border-slate-800 interactive-card">
-                
-                <div class="flex items-start justify-between gap-4 mb-3">
-                    <div>
-                        <span class="inline-block text-xs font-mono font-semibold px-2.5 py-1 rounded-md bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 mb-2">
-                            {{ edu.start_year }} — {{ edu.end_year }}
-                        </span>
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">
-                            {{ edu.degree }}
-                        </h3>
-                        <p class="text-sm font-medium text-slate-600 dark:text-slate-400">
-                            {{ edu.institution }} • <span class="text-xs text-slate-400">{{ edu.location }}</span>
-                        </p>
-                    </div>
-
-                    {% if edu.grade %}
-                    <div class="text-right flex-shrink-0">
-                        <span class="inline-block px-3 py-1 rounded-lg text-xs font-mono font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
-                            {{ edu.grade }}
-                        </span>
-                    </div>
-                    {% endif %}
-                </div>
-
-                {% if edu.description %}
-                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-                    {{ edu.description }}
-                </p>
-                {% endif %}
-
-                {% if edu.highlights_list %}
-                <div class="pt-3 border-t border-slate-100 dark:border-slate-800/80">
-                    <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-400 block mb-2 font-mono">
-                        Key Subjects & Scores
-                    </span>
-                    <div class="flex flex-wrap gap-2">
-                        {% for highlight in edu.highlights_list %}
-                        <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono">
-                            {{ highlight }}
-                        </span>
-                        {% endfor %}
-                    </div>
-                </div>
-                {% endif %}
-            </div>
-            {% endfor %}
-        </div>
-    </section>
-
-    <!-- ==================== 3. MY STORY & MOTIVATION ==================== -->
-    <section id="about" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-20">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            <div class="lg:col-span-5 space-y-4">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 font-mono">
-                    <i data-lucide="compass" class="w-3.5 h-3.5"></i>
-                    MY STORY
-                </div>
-                <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
-                    Driven by Curiosity, Grounded in Engineering
-                </h2>
-                <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-                    From my early years in <strong>Souk El Tennine</strong>, I was captivated by technology—not merely as consumer tools, but as evolving systems with the capacity to solve tangible everyday problems and make human life simpler.
-                </p>
-                <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-                    During high school, while specializing in <em>Technique Mathématiques — Génie Électrique</em>, I decided to take programming seriously. I dove headfirst into Python through Angela Yu's <strong>100 Days of Code</strong>, completing daily project challenges across data structures, desktop GUIs, browser automation, and Flask web servers.
-                </p>
-                <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-                    Now as a student at <strong>École Nationale Polytechnique d'Alger (ENP)</strong>, I combine rigorous mathematical foundations with continuous software development, actively learning <strong>Flutter</strong> to create clean, responsive mobile applications that will eventually integrate Python and AI backend systems.
-                </p>
-
-                <div class="pt-4 flex items-center gap-6">
-                    <div>
-                        <span class="block text-lg font-bold text-slate-900 dark:text-white font-mono">ENP Algiers</span>
-                        <span class="text-xs text-slate-500">Current Engineering School</span>
-                    </div>
-                    <div class="w-px h-8 bg-slate-200 dark:bg-slate-800"></div>
-                    <div>
-                        <span class="block text-lg font-bold text-slate-900 dark:text-white font-mono">Souk El Tennine</span>
-                        <span class="text-xs text-slate-500">Roots & Early Education</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Core Principles Cards -->
-            <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                
-                <div class="rounded-2xl glass-panel p-5 border border-slate-200/80 dark:border-slate-800 interactive-card">
-                    <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center mb-3">
-                        <i data-lucide="terminal" class="w-5 h-5"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-900 dark:text-white text-base mb-1">
-                        Hands-On Learning
-                    </h3>
-                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                        Theory matters, but genuine comprehension comes from building working software. I learn by creating projects, debugging edge cases, and understanding mechanics from the ground up.
-                    </p>
-                </div>
-
-                <div class="rounded-2xl glass-panel p-5 border border-slate-200/80 dark:border-slate-800 interactive-card">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-3">
-                        <i data-lucide="binary" class="w-5 h-5"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-900 dark:text-white text-base mb-1">
-                        Mathematical Rigor
-                    </h3>
-                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                        With near-perfect scores in Mathematics (20 in BEM, 18 in Bac) and Physics (19.5), I value algorithmic thinking, structured proofs, and analytical discipline.
-                    </p>
-                </div>
-
-                <div class="rounded-2xl glass-panel p-5 border border-slate-200/80 dark:border-slate-800 interactive-card">
-                    <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-3">
-                        <i data-lucide="smartphone" class="w-5 h-5"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-900 dark:text-white text-base mb-1">
-                        End-to-End Vision
-                    </h3>
-                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                        Rather than stopping at backend scripts or UI mockups, I aspire to engineer complete products: Python backend intelligence powering fluid Flutter mobile experiences.
-                    </p>
-                </div>
-
-                <div class="rounded-2xl glass-panel p-5 border border-slate-200/80 dark:border-slate-800 interactive-card">
-                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-3">
-                        <i data-lucide="sparkles" class="w-5 h-5"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-900 dark:text-white text-base mb-1">
-                        Intellectual Honesty
-                    </h3>
-                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                        I present my skills honestly. I don't claim to be an "expert" where I am a learner, but I hold myself to high standards of curiosity and consistency.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ==================== 4. TECHNICAL SKILLS SECTION ==================== -->
-    <section id="skills" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-20">
-        
-        <div class="text-center max-w-2xl mx-auto mb-14">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 border border-sky-200 dark:border-sky-800 mb-3 font-mono">
-                <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
-                CAPABILITIES & TOOLING
-            </div>
-            <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
-                Technical Skills & Exploration
-            </h2>
-            <p class="mt-2 text-slate-600 dark:text-slate-400 text-sm">
-                Categorized by domain with authentic proficiency levels—reflecting real projects built and concepts actively practiced.
-            </p>
-            
-            <!-- Proficiency Level Legend -->
-            <div class="mt-4 flex flex-wrap items-center justify-center gap-4 text-xs font-mono">
-                <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Comfortable (Built multiple projects)</span>
-                <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-sky-500"></span> Familiar (Applied in practice)</span>
-                <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-500"></span> Developing (Active coursework & prototyping)</span>
-                <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-slate-400"></span> Exploring (Conceptual grounding)</span>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {% for cat in skill_categories %}
-            <div class="rounded-2xl glass-panel p-6 border border-slate-200/80 dark:border-slate-800 interactive-card flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-9 h-9 rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center">
-                            <i data-lucide="{{ cat.icon or 'code-2' }}" class="w-5 h-5"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-900 dark:text-white text-base">
-                            {{ cat.name }}
-                        </h3>
-                    </div>
-
-                    <div class="space-y-3">
-                        {% for skill in cat.skills %}
-                        <div class="p-2.5 rounded-xl bg-slate-100/60 dark:bg-slate-800/40 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-                            <div class="flex items-center justify-between gap-2 mb-1">
-                                <span class="font-semibold text-xs text-slate-900 dark:text-slate-100">
-                                    {{ skill.name }}
-                                </span>
-                                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full
-                                    {% if skill.level == 'Comfortable' %}
-                                        bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800
-                                    {% elif skill.level == 'Familiar' %}
-                                        bg-sky-50 text-sky-700 dark:bg-sky-950/60 dark:text-sky-300 border border-sky-200 dark:border-sky-800
-                                    {% elif skill.level == 'Developing' %}
-                                        bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200 dark:border-amber-800
-                                    {% else %}
-                                        bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300
-                                    {% endif %}">
-                                    {{ skill.level }}
-                                </span>
-                            </div>
-                            {% if skill.description %}
-                            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">
-                                {{ skill.description }}
-                            </p>
-                            {% endif %}
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </section>
-
-    <!-- ==================== 5. FEATURED PROJECTS SHOWCASE ==================== -->
-    <section id="projects" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-20">
-        
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-            <div>
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 border border-sky-200 dark:border-sky-800 mb-3 font-mono">
-                    <i data-lucide="folder-git-2" class="w-3.5 h-3.5"></i>
-                    PRACTICAL PORTFOLIO
-                </div>
-                <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
-                    Featured Software Projects
-                </h2>
-                <p class="mt-2 text-slate-600 dark:text-slate-400 text-sm max-w-xl">
-                    Every project represents a problem explored, an architecture designed, and concrete software principles practiced.
-                </p>
-            </div>
-
-            <!-- View All Link -->
-            <a href="{{ url_for('projects.list_projects') }}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-sky-600 dark:text-sky-400 hover:text-sky-500 group">
-                <span>View all {{ projects|length }} projects</span>
-                <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <a href="{{ url_for('main.about') }}" class="explore-card reveal">
+                <div class="card-icon"><i data-lucide="user" class="w-5 h-5"></i></div>
+                <h3>About</h3>
+                <p>Where I grew up, why I started coding, and how Python became my starting point.</p>
+            </a>
+            <a href="{{ url_for('main.education') }}" class="explore-card reveal reveal-delay-1">
+                <div class="card-icon"><i data-lucide="graduation-cap" class="w-5 h-5"></i></div>
+                <h3>Education</h3>
+                <p>My school years in Souk El Tennine, my BEM and Bac grades, and starting at ENP.</p>
+            </a>
+            <a href="{{ url_for('main.skills') }}" class="explore-card reveal reveal-delay-2">
+                <div class="card-icon"><i data-lucide="cpu" class="w-5 h-5"></i></div>
+                <h3>Skills</h3>
+                <p>The languages and tools I use and what I'm currently learning, without fake percentages.</p>
+            </a>
+            <a href="{{ url_for('main.learning') }}" class="explore-card reveal">
+                <div class="card-icon"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                <h3>Learning</h3>
+                <p>What I learned in the past, what I'm studying right now, and what I want to learn next.</p>
+            </a>
+            <a href="{{ url_for('main.vision') }}" class="explore-card reveal reveal-delay-1">
+                <div class="card-icon"><i data-lucide="eye" class="w-5 h-5"></i></div>
+                <h3>Vision</h3>
+                <p>My long-term direction: software, AI, mobile apps, and turning ideas into real solutions.</p>
+            </a>
+            <a href="{{ url_for('main.certificates') }}" class="explore-card reveal reveal-delay-2">
+                <div class="card-icon"><i data-lucide="award" class="w-5 h-5"></i></div>
+                <h3>Certificates</h3>
+                <p>Courses I've finished and courses I'm currently taking.</p>
+            </a>
+            <a href="{{ url_for('main.contact') }}" class="explore-card reveal sm:col-span-2 lg:col-span-3">
+                <div class="card-icon"><i data-lucide="mail" class="w-5 h-5"></i></div>
+                <h3>Contact</h3>
+                <p>My email, Instagram, and a quick form to say hello.</p>
             </a>
         </div>
-
-        <!-- Filter Buttons Bar -->
-        <div class="flex flex-wrap items-center gap-2 mb-8">
-            <button type="button" data-category="all" class="project-filter-btn active-filter px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 text-white transition-all shadow-sm">
-                All Projects
-            </button>
-            {% for cat in categories %}
-            <button type="button" data-category="{{ cat }}" class="project-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
-                {{ cat }}
-            </button>
-            {% endfor %}
-        </div>
-
-        <!-- Projects Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-container">
-            {% for project in projects %}
-            <div class="project-item flex flex-col justify-between rounded-2xl glass-panel p-6 border border-slate-200/80 dark:border-slate-800 interactive-card transition-all" data-category="{{ project.category }}">
-                <div>
-                    <!-- Category & Featured Badges -->
-                    <div class="flex items-center justify-between gap-2 mb-3">
-                        <span class="inline-block text-xs font-mono font-semibold px-2.5 py-1 rounded-md bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 border border-sky-100 dark:border-sky-900">
-                            {{ project.category }}
-                        </span>
-                        {% if project.featured %}
-                        <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-amber-600 dark:text-amber-400">
-                            <i data-lucide="star" class="w-3 h-3 fill-amber-500"></i> Featured
-                        </span>
-                        {% endif %}
-                    </div>
-
-                    <!-- Title -->
-                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 leading-snug hover:text-sky-600 dark:hover:text-sky-400 transition-colors">
-                        <a href="{{ url_for('projects.detail', slug=project.slug) }}">
-                            {{ project.title }}
-                        </a>
-                    </h3>
-
-                    <!-- Summary -->
-                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-                        {{ project.summary }}
-                    </p>
-
-                    <!-- Tech Stack Pills -->
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        {% for tech in project.tech_list %}
-                        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
-                            {{ tech }}
-                        </span>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <!-- Footer: Actions & Honest Status -->
-                <div class="pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs">
-                    <a href="{{ url_for('projects.detail', slug=project.slug) }}" class="inline-flex items-center gap-1.5 font-semibold text-sky-600 dark:text-sky-400 hover:text-sky-500">
-                        <span>Case Study</span>
-                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-                    </a>
-
-                    <div class="text-slate-400 dark:text-slate-400 text-[11px]">
-                        {% if project.github_url %}
-                            <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="inline-flex items-center gap-1 hover:text-slate-700 dark:hover:text-slate-200">
-                                <i data-lucide="github" class="w-3.5 h-3.5"></i> Repo
-                            </a>
-                        {% else %}
-                            <span class="inline-flex items-center gap-1 text-slate-400 italic">
-                                <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Curating for GitHub
-                            </span>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
     </section>
-
-    <!-- ==================== 6. LEARNING IN PUBLIC / ROADMAP ==================== -->
-    <section id="journey" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-20">
-        
-        <div class="text-center max-w-2xl mx-auto mb-14">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-800 mb-3 font-mono">
-                <i data-lucide="milestone" class="w-3.5 h-3.5"></i>
-                LEARNING IN PUBLIC
-            </div>
-            <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
-                Technical Trajectory & Future Roadmap
-            </h2>
-            <p class="mt-2 text-slate-600 dark:text-slate-400 text-sm">
-                Where I started, what I am currently executing, and where I intend to take my engineering capabilities.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            <!-- Past Phase -->
-            <div class="rounded-2xl glass-panel p-6 border border-slate-200/80 dark:border-slate-800 interactive-card relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-sky-500/10 rounded-full blur-2xl -z-10"></div>
-                <div class="flex items-center gap-2 text-xs font-mono font-semibold text-sky-600 dark:text-sky-400 mb-3">
-                    <span class="w-2 h-2 rounded-full bg-sky-500"></span>
-                    PHASE 01 • FOUNDATIONS (PAST)
-                </div>
-                <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">
-                    Python, Automation & Software Fundamentals
-                </h3>
-                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-                    Extensive self-directed bootcamp training with Angela Yu's 100 Days of Code. Built over 20+ distinct projects exploring the breadth of software creation.
-                </p>
-                <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400 font-mono">
-                    <li class="flex items-start gap-2">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 mt-0.5"></i>
-                        <span>Python syntax, OOP, error handling</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 mt-0.5"></i>
-                        <span>Desktop GUIs (Tkinter & Turtle)</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 mt-0.5"></i>
-                        <span>Web scraping (BeautifulSoup & Selenium)</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 mt-0.5"></i>
-                        <span>Data analysis (Pandas, NumPy, Matplotlib)</span>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Present Phase -->
-            <div class="rounded-2xl glass-panel p-6 border-2 border-sky-500/40 dark:border-sky-500/50 interactive-card relative overflow-hidden shadow-lg">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl -z-10"></div>
-                <div class="flex items-center gap-2 text-xs font-mono font-semibold text-emerald-600 dark:text-emerald-400 mb-3">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                    </span>
-                    PHASE 02 • CORE ENGINEERING (PRESENT)
-                </div>
-                <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">
-                    ENP Rigor, Flutter & Backend Architecture
-                </h3>
-                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-                    Balancing intensive mathematics and engineering physics at ENP Algiers while developing production-oriented web and mobile capabilities.
-                </p>
-                <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400 font-mono">
-                    <li class="flex items-start gap-2">
-                        <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-sky-500 mt-0.5"></i>
-                        <span>Cycle préparatoire math/physics at ENP</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-sky-500 mt-0.5"></i>
-                        <span>Flutter & Dart mobile development</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-sky-500 mt-0.5"></i>
-                        <span>PostgreSQL & SQLAlchemy persistence</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-sky-500 mt-0.5"></i>
-                        <span>Clean REST API contracts</span>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Future Phase -->
-            <div class="rounded-2xl glass-panel p-6 border border-slate-200/80 dark:border-slate-800 interactive-card relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl -z-10"></div>
-                <div class="flex items-center gap-2 text-xs font-mono font-semibold text-purple-600 dark:text-purple-400 mb-3">
-                    <span class="w-2 h-2 rounded-full bg-purple-500"></span>
-                    PHASE 03 • SYNTHESIS (ASPIRATION)
-                </div>
-                <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">
-                    Python + AI Models + Flutter Mobile Apps
-                </h3>
-                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-                    The long-term objective: building complete, user-facing intelligent mobile products where Python and AI serve as the brain, and Flutter delivers seamless mobile execution.
-                </p>
-                <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400 font-mono">
-                    <li class="flex items-start gap-2">
-                        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-purple-500 mt-0.5"></i>
-                        <span>Applied machine learning inference</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-purple-500 mt-0.5"></i>
-                        <span>Cross-platform mobile apps for Android & iOS</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-purple-500 mt-0.5"></i>
-                        <span>End-to-end product design & deployment</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-purple-500 mt-0.5"></i>
-                        <span>Research & international academic collaboration</span>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ==================== 7. CERTIFICATIONS SECTION ==================== -->
-    <section id="certificates" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-20">
-        
-        <div class="text-center max-w-2xl mx-auto mb-14">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 mb-3 font-mono">
-                <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
-                VERIFIED LEARNING
-            </div>
-            <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
-                Certifications & Coursework
-            </h2>
-            <p class="mt-2 text-slate-600 dark:text-slate-400 text-sm">
-                Structured curriculums undertaken to build practical software engineering discipline.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {% for cert in certifications %}
-            <div class="rounded-2xl glass-panel p-6 border border-slate-200/80 dark:border-slate-800 interactive-card flex flex-col justify-between">
-                <div>
-                    <div class="flex items-start justify-between gap-4 mb-3">
-                        <div>
-                            <span class="text-xs font-mono font-semibold text-sky-600 dark:text-sky-400 block mb-1">
-                                {{ cert.issuer }}
-                            </span>
-                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">
-                                {{ cert.title }}
-                            </h3>
-                        </div>
-                        <span class="inline-block px-2.5 py-1 rounded-md text-[11px] font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
-                            {{ cert.issue_date }}
-                        </span>
-                    </div>
-
-                    {% if cert.description %}
-                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-                        {{ cert.description }}
-                    </p>
-                    {% endif %}
-
-                    {% if cert.skills_list %}
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        {% for sk in cert.skills_list %}
-                        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
-                            {{ sk }}
-                        </span>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                </div>
-
-                <div class="pt-3 border-t border-slate-100 dark:border-slate-800/80 text-xs text-slate-500">
-                    {% if cert.credential_url %}
-                        <a href="{{ cert.credential_url }}" target="_blank" rel="noopener" class="inline-flex items-center gap-1 font-semibold text-sky-600 dark:text-sky-400 hover:underline">
-                            <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Verify Credential
-                        </a>
-                    {% else %}
-                        <span class="italic text-slate-400">Course completed through independent curriculum study</span>
-                    {% endif %}
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </section>
-
-    <!-- ==================== 8. BEYOND CODE / PERSONAL DEVELOPMENT ==================== -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="rounded-3xl glass-panel p-8 sm:p-12 border border-slate-200/80 dark:border-slate-800 relative overflow-hidden">
-            <div class="max-w-3xl">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800 mb-3 font-mono">
-                    <i data-lucide="users" class="w-3.5 h-3.5"></i>
-                    BEYOND CODE
-                </div>
-                <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white mb-4">
-                    Growing Beyond The Terminal
-                </h2>
-                <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                    Writing clean code is only one part of creating impactful software. I am actively cultivating the multidisciplinary skills required to collaborate effectively, understand product dynamics, and solve real human problems:
-                </p>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="p-3.5 rounded-xl bg-slate-100/60 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/60">
-                        <span class="font-bold text-xs text-slate-900 dark:text-white block mb-1">
-                            Multilingual Communication
-                        </span>
-                        <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">
-                            English, French, and Arabic. Developing clear technical writing and active presentation skills.
-                        </p>
-                    </div>
-
-                    <div class="p-3.5 rounded-xl bg-slate-100/60 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/60">
-                        <span class="font-bold text-xs text-slate-900 dark:text-white block mb-1">
-                            Product & Business Curiosity
-                        </span>
-                        <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">
-                            Understanding product value, user experience, problem-solution fit, and real-world economics.
-                        </p>
-                    </div>
-
-                    <div class="p-3.5 rounded-xl bg-slate-100/60 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/60">
-                        <span class="font-bold text-xs text-slate-900 dark:text-white block mb-1">
-                            Leadership & Teamwork
-                        </span>
-                        <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">
-                            Active collaboration in engineering study groups, shared accountability, and mutual respect.
-                        </p>
-                    </div>
-
-                    <div class="p-3.5 rounded-xl bg-slate-100/60 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/60">
-                        <span class="font-bold text-xs text-slate-900 dark:text-white block mb-1">
-                            Self-Discipline & Time Management
-                        </span>
-                        <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">
-                            Sustaining intensive academic study at ENP while pursuing programming projects consistently.
-                        </p>
-                    </div>
-
-                    <div class="p-3.5 rounded-xl bg-slate-100/60 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/60">
-                        <span class="font-bold text-xs text-slate-900 dark:text-white block mb-1">
-                            First-Principles Problem Solving
-                        </span>
-                        <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">
-                            Breaking down ambiguous engineering and physical challenges into fundamental truths.
-                        </p>
-                    </div>
-
-                    <div class="p-3.5 rounded-xl bg-slate-100/60 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/60">
-                        <span class="font-bold text-xs text-slate-900 dark:text-white block mb-1">
-                            Creative Curiosity
-                        </span>
-                        <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">
-                            Cultivating interest in UI design, typography, systems architecture, and engineering aesthetics.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 9. CONTACT SECTION ==================== -->
-    <section id="contact" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-20">
-        
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            
-            <div class="lg:col-span-5 space-y-6">
-                <div>
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 border border-sky-200 dark:border-sky-800 mb-3 font-mono">
-                        <i data-lucide="mail" class="w-3.5 h-3.5"></i>
-                        GET IN TOUCH
-                    </div>
-                    <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
-                        Let's Start a Conversation
-                    </h2>
-                    <p class="mt-2 text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                        Whether you are an admissions committee member, academic researcher, developer, or recruiter looking to connect with a motivated engineering student—I'd love to hear from you.
-                    </p>
-                </div>
-
-                <div class="space-y-3">
-                    <div class="flex items-center gap-3 p-3 rounded-xl glass-panel border border-slate-200/80 dark:border-slate-800">
-                        <div class="w-9 h-9 rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center">
-                            <i data-lucide="mail" class="w-4 h-4"></i>
-                        </div>
-                        <div>
-                            <span class="text-xs text-slate-400 block font-mono">Direct Email</span>
-                            <a href="mailto:{{ contact_email }}" class="text-sm font-semibold text-slate-900 dark:text-white hover:text-sky-600 dark:hover:text-sky-400">
-                                {{ contact_email }}
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center gap-3 p-3 rounded-xl glass-panel border border-slate-200/80 dark:border-slate-800">
-                        <div class="w-9 h-9 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
-                            <i data-lucide="map-pin" class="w-4 h-4"></i>
-                        </div>
-                        <div>
-                            <span class="text-xs text-slate-400 block font-mono">Location</span>
-                            <span class="text-sm font-semibold text-slate-900 dark:text-white">
-                                Souk El Tennine & Algiers, Algeria
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center gap-3 p-3 rounded-xl glass-panel border border-slate-200/80 dark:border-slate-800">
-                        <div class="w-9 h-9 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center">
-                            <i data-lucide="github" class="w-4 h-4"></i>
-                        </div>
-                        <div>
-                            <span class="text-xs text-slate-400 block font-mono">GitHub Profile</span>
-                            <a href="{{ github_url }}" target="_blank" rel="noopener" class="text-sm font-semibold text-slate-900 dark:text-white hover:text-sky-600 dark:hover:text-sky-400">
-                                github.com/ramikhaled
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contact Form Card -->
-            <div class="lg:col-span-7">
-                <div class="rounded-2xl glass-panel p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800 shadow-xl">
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6">
-                        Send a Direct Message
-                    </h3>
-
-                    <form method="POST" action="{{ url_for('main.index') }}#contact" class="space-y-4">
-                        {{ form.hidden_tag() }}
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1 font-mono">
-                                    Your Name <span class="text-red-500">*</span>
-                                </label>
-                                {{ form.name(id="name", class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all", placeholder="e.g. Dr. Sarah Jenkins") }}
-                                {% if form.name.errors %}
-                                    <p class="text-xs text-red-500 mt-1">{{ form.name.errors[0] }}</p>
-                                {% endif %}
-                            </div>
-
-                            <div>
-                                <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1 font-mono">
-                                    Your Email <span class="text-red-500">*</span>
-                                </label>
-                                {{ form.email(id="email", class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all", placeholder="name@organization.edu") }}
-                                {% if form.email.errors %}
-                                    <p class="text-xs text-red-500 mt-1">{{ form.email.errors[0] }}</p>
-                                {% endif %}
-                            </div>
-                        </div>
-
-                        <div>
-                            <label for="subject" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1 font-mono">
-                                Subject <span class="text-red-500">*</span>
-                            </label>
-                            {{ form.subject(id="subject", class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all", placeholder="Opportunity / Academic Inquiry / Collaboration") }}
-                            {% if form.subject.errors %}
-                                <p class="text-xs text-red-500 mt-1">{{ form.subject.errors[0] }}</p>
-                            {% endif %}
-                        </div>
-
-                        <div>
-                            <label for="message" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1 font-mono">
-                                Message <span class="text-red-500">*</span>
-                            </label>
-                            {{ form.message(id="message", rows="5", class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all", placeholder="Write your message here...") }}
-                            {% if form.message.errors %}
-                                <p class="text-xs text-red-500 mt-1">{{ form.message.errors[0] }}</p>
-                            {% endif %}
-                        </div>
-
-                        <div class="pt-2">
-                            <button type="submit" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-medium text-sm shadow-md hover:shadow-sky-500/20 transition-all hover:scale-[1.01]">
-                                <i data-lucide="send" class="w-4 h-4"></i>
-                                <span>Send Message</span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
 </div>
 {% endblock %}

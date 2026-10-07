@@ -12,13 +12,8 @@
                 Dashboard Overview
             </h1>
             <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                Manage projects, education records, verified certificates, and incoming messages.
+                Manage education records, skills, certificates, and incoming messages.
             </p>
-        </div>
-        <div class="flex items-center gap-3">
-            <a href="{{ url_for('admin.project_new') }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold shadow-sm transition-all">
-                <i data-lucide="plus" class="w-4 h-4"></i> New Project
-            </a>
         </div>
     </div>
 
@@ -27,13 +22,13 @@
         
         <div class="p-5 rounded-2xl bg-white dark:bg-[#0d1424] border border-slate-200 dark:border-slate-800 shadow-sm">
             <div class="flex items-center justify-between text-slate-400 mb-2">
-                <span class="text-xs font-mono font-semibold">PROJECTS</span>
-                <i data-lucide="folder-git-2" class="w-4 h-4 text-sky-500"></i>
+                <span class="text-xs font-mono font-semibold">EDUCATION</span>
+                <i data-lucide="graduation-cap" class="w-4 h-4 text-violet-500"></i>
             </div>
             <div class="text-2xl font-extrabold text-slate-900 dark:text-white font-mono">
-                {{ projects_count }}
+                {{ education_count }}
             </div>
-            <span class="text-[11px] text-slate-500">{{ published_projects }} published</span>
+            <span class="text-[11px] text-slate-500">Academic milestones</span>
         </div>
 
         <div class="p-5 rounded-2xl bg-white dark:bg-[#0d1424] border border-slate-200 dark:border-slate-800 shadow-sm">
@@ -61,77 +56,47 @@
         <div class="p-5 rounded-2xl bg-white dark:bg-[#0d1424] border border-slate-200 dark:border-slate-800 shadow-sm">
             <div class="flex items-center justify-between text-slate-400 mb-2">
                 <span class="text-xs font-mono font-semibold">MESSAGES</span>
-                <i data-lucide="inbox" class="w-4 h-4 text-amber-500"></i>
+                <i data-lucide="mail" class="w-4 h-4 text-sky-500"></i>
             </div>
             <div class="text-2xl font-extrabold text-slate-900 dark:text-white font-mono">
                 {{ messages_count }}
             </div>
-            <span class="text-[11px] text-amber-600 dark:text-amber-400">{{ unread_messages }} unread</span>
+            <span class="text-[11px] text-slate-500">{{ unread_messages }} unread</span>
         </div>
-
     </div>
 
-    <!-- Recent Activity: Projects & Messages -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        
-        <!-- Recent Projects -->
-        <div class="p-6 rounded-2xl bg-white dark:bg-[#0d1424] border border-slate-200 dark:border-slate-800 shadow-sm">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="font-bold text-slate-900 dark:text-white text-base">
-                    Recent Projects
-                </h2>
-                <a href="{{ url_for('admin.projects') }}" class="text-xs text-sky-600 dark:text-sky-400 hover:underline">
-                    Manage All →
-                </a>
-            </div>
+    <!-- Recent Messages -->
+    <div class="p-6 rounded-2xl bg-white dark:bg-[#0d1424] border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i data-lucide="inbox" class="w-4 h-4 text-violet-500"></i>
+                Recent Messages
+            </h2>
+            <a href="{{ url_for('admin.messages') }}" class="text-xs font-medium text-violet-600 dark:text-violet-400 hover:underline">
+                View All &rarr;
+            </a>
+        </div>
 
-            <div class="space-y-3">
-                {% for p in recent_projects %}
-                <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/60 dark:border-slate-800 text-xs">
-                    <div>
-                        <span class="font-semibold text-slate-900 dark:text-white block">{{ p.title }}</span>
-                        <span class="text-slate-500 font-mono text-[11px]">{{ p.category }} • {{ p.tech_list[:2]|join(', ') }}</span>
-                    </div>
+        {% if recent_messages %}
+        <div class="space-y-3">
+            {% for msg in recent_messages %}
+            <div class="flex items-start justify-between gap-3 p-3 rounded-xl {{ 'bg-violet-50 dark:bg-violet-950/20' if not msg.is_read else 'bg-slate-50 dark:bg-slate-900/40' }}">
+                <div class="flex-1 min-w-0">
                     <div class="flex items-center gap-2">
-                        <a href="{{ url_for('admin.project_edit', id=p.id) }}" class="p-1 text-slate-400 hover:text-sky-600">
-                            <i data-lucide="edit-2" class="w-3.5 h-3.5"></i>
-                        </a>
+                        <span class="text-sm font-semibold text-slate-900 dark:text-white truncate">{{ msg.name }}</span>
+                        {% if not msg.is_read %}
+                        <span class="px-1.5 py-0.5 text-[10px] font-bold bg-violet-500 text-white rounded-full">NEW</span>
+                        {% endif %}
                     </div>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 truncate">{{ msg.subject }}</p>
                 </div>
-                {% else %}
-                <p class="text-xs text-slate-500">No projects created yet.</p>
-                {% endfor %}
+                <span class="text-[10px] text-slate-400 font-mono whitespace-nowrap">{{ msg.created_at.strftime('%b %d') if msg.created_at else '' }}</span>
             </div>
+            {% endfor %}
         </div>
-
-        <!-- Recent Contact Messages -->
-        <div class="p-6 rounded-2xl bg-white dark:bg-[#0d1424] border border-slate-200 dark:border-slate-800 shadow-sm">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="font-bold text-slate-900 dark:text-white text-base">
-                    Recent Contact Inquiries
-                </h2>
-                <a href="{{ url_for('admin.messages') }}" class="text-xs text-sky-600 dark:text-sky-400 hover:underline">
-                    View All →
-                </a>
-            </div>
-
-            <div class="space-y-3">
-                {% for msg in recent_messages %}
-                <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/60 dark:border-slate-800 text-xs">
-                    <div class="flex items-center justify-between mb-1">
-                        <span class="font-bold text-slate-900 dark:text-white">{{ msg.name }}</span>
-                        <span class="text-[10px] text-slate-400 font-mono">{{ msg.created_at.strftime('%b %d, %Y') }}</span>
-                    </div>
-                    <p class="font-medium text-slate-700 dark:text-slate-300 mb-1">{{ msg.subject }}</p>
-                    <p class="text-slate-500 line-clamp-2 text-[11px]">{{ msg.message }}</p>
-                </div>
-                {% else %}
-                <p class="text-xs text-slate-500">No contact messages received yet.</p>
-                {% endfor %}
-            </div>
-        </div>
-
+        {% else %}
+        <p class="text-sm text-slate-400 text-center py-8">No messages yet.</p>
+        {% endif %}
     </div>
-
 </div>
 {% endblock %}

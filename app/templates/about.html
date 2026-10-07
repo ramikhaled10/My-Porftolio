@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}About | Rami Khaled{% endblock %}
+{% block meta_description %}The story of Rami Khaled — from Souk El Tennine, Algeria, to ENP Algiers. Why Python was a foundation, not an endpoint.{% endblock %}
+
+{% block content %}
+<div class="page-enter max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <header class="mb-12">
+        <span class="section-label">About Me</span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mt-4 mb-4" style="color: var(--text);">
+            A little bit about me and my journey
+        </h1>
+        <p class="text-lg leading-relaxed" style="color: var(--text-secondary);">
+            My name is Rami Khaled. I'm an 18-year-old engineering student from Algeria who loves coding and building useful things.
+        </p>
+    </header>
+
+    <article class="space-y-8 text-[15px] sm:text-base leading-relaxed" style="color: var(--text-secondary);">
+        <p class="reveal">
+            I was born and raised in Algeria, and I went to school in Souk El Tennine through primary, middle, and high school.
+            Ever since I was young, I've been really curious about computers and technology.
+            What caught my attention wasn't just writing code, but how software can take something complicated or repetitive and make people's lives easier.
+        </p>
+
+        <!-- Academic Milestones Highlight -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6 reveal">
+            <div class="glass-panel p-5 rounded-xl border" style="border-color: var(--border);">
+                <span class="text-xs font-mono uppercase tracking-wider block" style="color: var(--primary);">Middle School • Souk El Tennine</span>
+                <h3 class="text-base font-bold mt-1" style="color: var(--text);">BEM: 17.43 / 20</h3>
+                <p class="text-xs mt-2 font-mono" style="color: var(--text-secondary);">
+                    Math: 20 • Science: 19 • Physics: 18
+                </p>
+            </div>
+            <div class="glass-panel p-5 rounded-xl border" style="border-color: var(--border);">
+                <span class="text-xs font-mono uppercase tracking-wider block" style="color: var(--primary);">High School • Baccalaureate 2026</span>
+                <h3 class="text-base font-bold mt-1" style="color: var(--text);">Bac: 17.80 / 20 (Technique Mathématiques)</h3>
+                <p class="text-xs mt-2 font-mono" style="color: var(--text-secondary);">
+                    Math: 18 • Physics: 19.5 • Electrical Engineering: 19.5
+                </p>
+            </div>
+        </div>
+
+        <p class="reveal">
+            Right now, I am in my first year at <strong style="color: var(--text);">École Nationale Polytechnique d'Alger (ENP)</strong>.
+            Back in high school, I decided to start learning programming seriously. I began with Python.
+            My first big step was taking Angela Yu's
+            <strong style="color: var(--text);">100 Days of Code Python</strong> course.
+        </p>
+        <p class="reveal">
+            I started learning Python to build a strong foundation in programming.
+            My goal wasn't just to become a Python developer — I wanted to understand software fundamentals really well so that I could later go deeper into Artificial Intelligence.
+        </p>
+        <p class="reveal">
+            Right now, alongside my classes at ENP, I am learning <strong style="color: var(--text);">Flutter and Dart</strong> for mobile development, and I am taking an online course from <strong style="color: var(--text);">EDUCBA through Coursera</strong>.
+        </p>
+    </article>
+
+    <section class="mt-14 reveal">
+        <h2 class="text-xl font-bold mb-6" style="color: var(--text);">How I see my learning path</h2>
+        <ol class="space-y-0">
+            {% set steps = [
+                ('Programming basics', 'Learning the fundamentals of programming and how to solve problems with code.'),
+                ('Python', 'My first main language — great for learning quickly, writing scripts, and backend projects.'),
+                ('Software fundamentals', 'Learning how APIs, databases, servers, and the web all connect together.'),
+                ('Mobile apps with Flutter', 'What I\'m learning now: building clean mobile apps that run directly on phones.'),
+                ('Going deeper into AI', 'Learning machine learning and how to add smart features to software.'),
+                ('Building real products', 'Combining software, AI, and mobile apps to make products that actually help people.')
+            ] %}
+            {% for title, note in steps %}
+            <li class="roadmap-step pb-8">
+                <span class="roadmap-icon">{{ loop.index }}</span>
+                <h3 class="font-semibold" style="color: var(--text);">{{ title }}</h3>
+                <p class="text-sm mt-1" style="color: var(--text-secondary);">{{ note }}</p>
+            </li>
+            {% endfor %}
+        </ol>
+    </section>
+
+    <section class="mt-6 reveal glass-panel p-6 sm:p-8">
+        <h2 class="text-xl font-bold mb-4" style="color: var(--text);">Why I started with 100 Days of Code</h2>
+        <p class="leading-relaxed mb-4" style="color: var(--text-secondary);">
+            I started Angela Yu's 100 Days of Code because I wanted a solid base in programming.
+            I knew that if I wanted to do meaningful work in AI later, I needed to understand software from the ground up first.
+        </p>
+        <p class="leading-relaxed mb-5" style="color: var(--text-secondary);">
+            Python gave me a chance to try many different areas of software development. It helped me see how things work behind the scenes:
+        </p>
+        <p class="text-xs font-mono uppercase tracking-wider mb-3" style="color: var(--muted);">Things I explored during the course</p>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm" style="color: var(--text-secondary);">
+            {% for item in [
+                'Programming fundamentals',
+                'Object-oriented programming (OOP)',
+                'Automation scripts',
+                'APIs & HTTP requests',
+                'Web development with Flask',
+                'Databases & SQL',
+                'Web scraping',
+                'Desktop GUI apps (Tkinter)',
+                'Browser automation (Selenium)',
+                'Data processing & charts'
+            ] %}
+            <li class="flex items-start gap-2">
+                <span class="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style="background: var(--primary);"></span>
+                {{ item }}
+            </li>
+            {% endfor %}
+        </ul>
+        <p class="mt-6 text-sm italic" style="color: var(--muted);">
+            I am still at the beginning of my journey, but I am excited about what comes next and I am working consistently every day.
+        </p>
+    </section>
+</div>
+{% endblock %}

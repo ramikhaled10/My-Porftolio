@@ -9,5 +9,6 @@ class SiteSettingsForm(FlaskForm):
     status_text = StringField('Current Status Badge', validators=[Optional(), Length(max=150)])
     github_url = StringField('GitHub Profile URL', validators=[Optional(), Length(max=255)])
     linkedin_url = StringField('LinkedIn Profile URL', validators=[Optional(), Length(max=255)])
+    instagram_url = StringField('Instagram Profile URL', validators=[Optional(), Length(max=255)])
     contact_email = StringField('Contact Email', validators=[Optional(), Length(max=120)])
     submit = SubmitField('Update Settings')

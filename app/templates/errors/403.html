@@ -4,13 +4,13 @@
 
 {% block content %}
 <div class="min-h-[70vh] flex items-center justify-center px-4 py-16 text-center">
-    <div class="max-w-md rounded-2xl glass-panel p-8 border border-slate-200/80 dark:border-slate-800 shadow-xl">
+    <div class="max-w-md rounded-2xl glass-panel p-8">
         <span class="text-5xl font-mono font-extrabold text-amber-600 dark:text-amber-400 block mb-3">403</span>
-        <h1 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Access Forbidden</h1>
-        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+        <h1 class="text-xl font-bold mb-2" style="color: var(--text);">Access Forbidden</h1>
+        <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
             You do not have permission to access the requested resource.
         </p>
-        <a href="{{ url_for('main.index') }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold shadow-sm transition-all">
+        <a href="{{ url_for('main.index') }}" class="btn-primary">
             <i data-lucide="home" class="w-4 h-4"></i> Back to Homepage
         </a>
     </div>

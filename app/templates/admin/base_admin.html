@@ -48,7 +48,7 @@
         <div>
             <!-- Header Brand -->
             <div class="h-16 flex items-center gap-3 px-6 border-b border-slate-200 dark:border-slate-800">
-                <div class="w-8 h-8 rounded-lg bg-sky-600 text-white flex items-center justify-center font-mono font-bold text-sm">
+                <div class="w-8 h-8 rounded-lg text-white flex items-center justify-center font-mono font-bold text-sm" style="background: var(--gradient-primary);">
                     RK
                 </div>
                 <div>
@@ -59,32 +59,29 @@
 
             <!-- Links -->
             <nav class="p-4 space-y-1 text-sm font-medium">
-                <a href="{{ url_for('admin.dashboard') }}" class="flex items-center gap-3 px-3 py-2 rounded-xl {% if request.endpoint == 'admin.dashboard' %}bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 font-semibold{% else %}text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60{% endif %}">
+                <a href="{{ url_for('admin.dashboard') }}" class="flex items-center gap-3 px-3 py-2 rounded-xl {% if request.endpoint == 'admin.dashboard' %}bg-violet-50 dark:bg-violet-950/60 text-violet-600 dark:text-violet-400 font-semibold{% else %}text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60{% endif %}">
                     <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Overview
                 </a>
-                <a href="{{ url_for('admin.projects') }}" class="flex items-center gap-3 px-3 py-2 rounded-xl {% if 'project' in request.endpoint %}bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 font-semibold{% else %}text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60{% endif %}">
-                    <i data-lucide="folder-git-2" class="w-4 h-4"></i> Projects
-                </a>
-                <a href="{{ url_for('admin.certificates') }}" class="flex items-center gap-3 px-3 py-2 rounded-xl {% if 'certificate' in request.endpoint %}bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 font-semibold{% else %}text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60{% endif %}">
+                <a href="{{ url_for('admin.certificates') }}" class="flex items-center gap-3 px-3 py-2 rounded-xl {% if 'certificate' in request.endpoint %}bg-violet-50 dark:bg-violet-950/60 text-violet-600 dark:text-violet-400 font-semibold{% else %}text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60{% endif %}">
                     <i data-lucide="award" class="w-4 h-4"></i> Certificates
                 </a>
-                <a href="{{ url_for('admin.education') }}" class="flex items-center gap-3 px-3 py-2 rounded-xl {% if 'education' in request.endpoint %}bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 font-semibold{% else %}text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60{% endif %}">
+                <a href="{{ url_for('admin.education') }}" class="flex items-center gap-3 px-3 py-2 rounded-xl {% if 'education' in request.endpoint %}bg-violet-50 dark:bg-violet-950/60 text-violet-600 dark:text-violet-400 font-semibold{% else %}text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60{% endif %}">
                     <i data-lucide="graduation-cap" class="w-4 h-4"></i> Education
                 </a>
-                <a href="{{ url_for('admin.skills') }}" class="flex items-center gap-3 px-3 py-2 rounded-xl {% if 'skill' in request.endpoint %}bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 font-semibold{% else %}text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60{% endif %}">
+                <a href="{{ url_for('admin.skills') }}" class="flex items-center gap-3 px-3 py-2 rounded-xl {% if 'skill' in request.endpoint %}bg-violet-50 dark:bg-violet-950/60 text-violet-600 dark:text-violet-400 font-semibold{% else %}text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60{% endif %}">
                     <i data-lucide="cpu" class="w-4 h-4"></i> Skills
                 </a>
-                <a href="{{ url_for('admin.messages') }}" class="flex items-center justify-between px-3 py-2 rounded-xl {% if 'message' in request.endpoint %}bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 font-semibold{% else %}text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60{% endif %}">
+                <a href="{{ url_for('admin.messages') }}" class="flex items-center justify-between px-3 py-2 rounded-xl {% if 'message' in request.endpoint %}bg-violet-50 dark:bg-violet-950/60 text-violet-600 dark:text-violet-400 font-semibold{% else %}text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60{% endif %}">
                     <div class="flex items-center gap-3">
                         <i data-lucide="inbox" class="w-4 h-4"></i> Messages
                     </div>
                     {% if unread_messages_count > 0 %}
-                    <span class="inline-flex items-center justify-center px-1.5 py-0.5 text-[10px] font-bold text-white bg-sky-600 rounded-full">
+            <span class="inline-flex items-center justify-center px-1.5 py-0.5 text-[10px] font-bold text-white bg-violet-600 rounded-full">
                         {{ unread_messages_count }}
                     </span>
                     {% endif %}
                 </a>
-                <a href="{{ url_for('admin.settings') }}" class="flex items-center gap-3 px-3 py-2 rounded-xl {% if 'setting' in request.endpoint %}bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 font-semibold{% else %}text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60{% endif %}">
+                <a href="{{ url_for('admin.settings') }}" class="flex items-center gap-3 px-3 py-2 rounded-xl {% if 'setting' in request.endpoint %}bg-violet-50 dark:bg-violet-950/60 text-violet-600 dark:text-violet-400 font-semibold{% else %}text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60{% endif %}">
                     <i data-lucide="settings" class="w-4 h-4"></i> Site Settings
                 </a>
             </nav>
@@ -108,10 +105,10 @@
         <header class="h-16 bg-white dark:bg-[#0b101d] border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-4 sm:px-8">
             <div class="flex items-center gap-3">
                 <a href="{{ url_for('main.index') }}" class="md:hidden flex items-center gap-2">
-                    <div class="w-7 h-7 rounded bg-sky-600 text-white flex items-center justify-center font-mono font-bold text-xs">RK</div>
+                    <div class="w-7 h-7 rounded text-white flex items-center justify-center font-mono font-bold text-xs" style="background: var(--gradient-primary);">RK</div>
                 </a>
                 <span class="text-sm font-semibold text-slate-800 dark:text-slate-200">
-                    Logged in as <strong class="text-sky-600">{{ current_user.username }}</strong>
+                    Logged in as <strong class="text-violet-600">{{ current_user.username }}</strong>
                 </span>
             </div>
 

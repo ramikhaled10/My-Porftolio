@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block title %}Vision | Rami Khaled{% endblock %}
+{% block meta_description %}Long-term vision of Rami Khaled: useful, intelligent, accessible technology at the intersection of AI, software engineering, mobile development, and entrepreneurship.{% endblock %}
+
+{% block content %}
+<div class="page-enter max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <header class="mb-12">
+        <span class="section-label">My Vision</span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mt-4 mb-5" style="color: var(--text);">
+            What I want to build toward
+        </h1>
+        <p class="text-lg leading-relaxed" style="color: var(--text-secondary);">
+            I am interested in software, AI, and business, and I want to learn how I can combine them to build useful products that solve real problems.
+        </p>
+    </header>
+
+    <section class="mb-14 space-y-4 leading-relaxed reveal" style="color: var(--text-secondary);">
+        <p>
+            I don't want to learn programming languages just to add them to a list.
+            I want to understand how software works so I can actually build useful things with it.
+        </p>
+        <p>
+            I want to learn more about AI and use it to build useful applications.
+            My goal is to combine AI, software development, and mobile applications to eventually create products that solve real problems, instead of just making technology for the sake of technology.
+        </p>
+        <div class="flex flex-wrap gap-2 pt-2">
+            {% for theme in ['Software Development', 'Artificial Intelligence', 'Mobile Apps', 'Entrepreneurship', 'Product Design'] %}
+            <span class="text-xs font-semibold px-3 py-1.5 rounded-full" style="background: var(--primary-subtle); color: var(--primary);">{{ theme }}</span>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="mb-14 reveal">
+        <h2 class="text-xl font-bold mb-3" style="color: var(--text);">Business & Entrepreneurship</h2>
+        <p class="leading-relaxed mb-4" style="color: var(--text-secondary);">
+            Coding is important, but it is only one piece of the puzzle.
+            I am also really interested in entrepreneurship, business, and how products are built.
+        </p>
+        <p class="leading-relaxed mb-6" style="color: var(--text-secondary);">
+            Alongside my engineering studies, I want to learn how to identify real problems that people face,
+            understand what users actually need, turn ideas into working prototypes, and build products that bring genuine value to people.
+        </p>
+        <div class="space-y-0 font-mono text-sm">
+            {% for line in ['1. Spot a real problem', '2. Come up with a simple idea', '3. Build software / prototype', '4. Test with real users', '5. Turn into a useful product that helps people'] %}
+            <div>
+                <div class="px-4 py-2.5 rounded-lg" style="background: var(--surface-elevated); border: 1px solid var(--border); color: var(--text);">{{ line }}</div>
+                {% if not loop.last %}
+                <div class="flow-connector text-xs">↓</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="mb-14 reveal glass-panel p-6 sm:p-8">
+        <h2 class="text-xl font-bold mb-3" style="color: var(--text);">Why I am excited about AI</h2>
+        <p class="leading-relaxed mb-4" style="color: var(--text-secondary);">
+            What excites me most about AI and software is that they can make everyday tools much smarter and simpler to use.
+            In the future, I want to explore areas like:
+        </p>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm" style="color: var(--text-secondary);">
+            {% for item in [
+                'Mobile apps with AI features built in',
+                'Helpful assistants that save people time',
+                'Automation tools for repetitive tasks',
+                'Smart productivity tools',
+                'Software that makes complicated tasks easy'
+            ] %}
+            <li class="flex items-start gap-2">
+                <span class="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style="background: var(--primary);"></span>
+                {{ item }}
+            </li>
+            {% endfor %}
+        </ul>
+        <p class="mt-5 text-sm italic" style="color: var(--muted);">
+            These are things I want to build in the future once I have the right experience and skills.
+        </p>
+    </section>
+
+    <section class="reveal">
+        <h2 class="text-xl font-bold mb-8" style="color: var(--text);">My long-term direction</h2>
+        <ol class="space-y-0">
+            {% set stages = [
+                ('Python / Software Foundations', 'Learning the basics of programming, OOP, APIs, databases, and how backends work.'),
+                ('Artificial Intelligence (AI)', 'Studying machine learning and how to add smart features to software.'),
+                ('Flutter / Mobile Development', 'Building clean mobile apps with Flutter so software can live directly on people\'s phones.'),
+                ('AI-Powered Applications', 'Connecting AI backends with smooth mobile interfaces to build complete, helpful apps.'),
+                ('Entrepreneurship + Innovation', 'Using these technical skills to create real products, start projects, and solve actual problems.')
+            ] %}
+            {% for title, detail in stages %}
+            <li class="roadmap-step pb-10">
+                <span class="roadmap-icon">{{ loop.index }}</span>
+                <p class="text-xs font-mono uppercase tracking-wider" style="color: var(--primary);">Step {{ loop.index }}</p>
+                <h3 class="text-base font-bold mt-0.5" style="color: var(--text);">{{ title }}</h3>
+                <p class="mt-1 text-sm leading-relaxed" style="color: var(--text-secondary);">{{ detail }}</p>
+            </li>
+            {% endfor %}
+        </ol>
+    </section>
+
+    <!-- Honest perspective note -->
+    <div class="mt-8 p-5 rounded-xl border text-xs leading-relaxed" style="background: var(--surface); border-color: var(--border); color: var(--muted);">
+        <strong style="color: var(--text);">To be clear:</strong> I do not call myself an AI expert or an established entrepreneur.
+        I am an 18-year-old engineering student at ENP Algiers. These are my genuine interests and the long-term direction I am working hard to build toward.
+    </div>
+</div>
+{% endblock %}

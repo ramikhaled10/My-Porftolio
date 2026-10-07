@@ -1,13 +1,12 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
-from slugify import slugify
 from app.extensions import db
 from app.models import (
-    Project, ProjectImage, Skill, SkillCategory, Education,
+    Skill, SkillCategory, Education,
     Certification, ContactMessage, SiteSetting
 )
 from app.forms import (
-    ProjectForm, SkillForm, SkillCategoryForm, EducationForm,
+    SkillForm, SkillCategoryForm, EducationForm,
     CertificationForm, SiteSettingsForm
 )
 
@@ -24,141 +23,22 @@ def require_admin():
 
 @admin_bp.route('/')
 def dashboard():
-    projects_count = Project.query.count()
-    published_projects = Project.query.filter_by(published=True).count()
     skills_count = Skill.query.count()
     certifications_count = Certification.query.count()
+    education_count = Education.query.count()
     messages_count = ContactMessage.query.count()
     unread_messages = ContactMessage.query.filter_by(is_read=False).count()
     recent_messages = ContactMessage.query.order_by(ContactMessage.created_at.desc()).limit(5).all()
-    recent_projects = Project.query.order_by(Project.created_at.desc()).limit(5).all()
 
     return render_template(
         'admin/dashboard.html',
-        projects_count=projects_count,
-        published_projects=published_projects,
         skills_count=skills_count,
         certifications_count=certifications_count,
+        education_count=education_count,
         messages_count=messages_count,
         unread_messages=unread_messages,
-        recent_messages=recent_messages,
-        recent_projects=recent_projects
+        recent_messages=recent_messages
     )
-
-
-# ===================== PROJECTS MANAGEMENT =====================
-
-@admin_bp.route('/projects')
-def projects():
-    all_projects = Project.query.order_by(Project.order_num.asc(), Project.created_at.desc()).all()
-    return render_template('admin/projects.html', projects=all_projects)
-
-
-@admin_bp.route('/projects/new', methods=['GET', 'POST'])
-def project_new():
-    form = ProjectForm()
-    if form.validate_on_submit():
-        slug = form.slug.data.strip() if form.slug.data else slugify(form.title.data)
-        
-        # Ensure unique slug
-        base_slug = slug
-        counter = 1
-        while Project.query.filter_by(slug=slug).first():
-            slug = f"{base_slug}-{counter}"
-            counter += 1
-
-        project = Project(
-            title=form.title.data.strip(),
-            slug=slug,
-            summary=form.summary.data.strip(),
-            description=form.description.data.strip(),
-            problem=form.problem.data.strip() if form.problem.data else None,
-            approach=form.approach.data.strip() if form.approach.data else None,
-            key_features=form.key_features.data.strip() if form.key_features.data else None,
-            key_learnings=form.key_learnings.data.strip() if form.key_learnings.data else None,
-            challenges=form.challenges.data.strip() if form.challenges.data else None,
-            future_improvements=form.future_improvements.data.strip() if form.future_improvements.data else None,
-            category=form.category.data,
-            technologies=form.technologies.data.strip(),
-            github_url=form.github_url.data.strip() if form.github_url.data else None,
-            demo_url=form.demo_url.data.strip() if form.demo_url.data else None,
-            image_url=form.image_url.data.strip() if form.image_url.data else None,
-            featured=form.featured.data,
-            published=form.published.data,
-            order_num=form.order_num.data or 0
-        )
-        db.session.add(project)
-        db.session.commit()
-        flash(f'Project "{project.title}" created successfully!', 'success')
-        return redirect(url_for('admin.projects'))
-
-    return render_template('admin/project_form.html', form=form, title='Create New Project')
-
-
-@admin_bp.route('/projects/<int:id>/edit', methods=['GET', 'POST'])
-def project_edit(id):
-    project = Project.query.get_or_404(id)
-    form = ProjectForm(obj=project)
-
-    if form.validate_on_submit():
-        slug = form.slug.data.strip()
-        existing = Project.query.filter(Project.slug == slug, Project.id != project.id).first()
-        if existing:
-            flash('This slug is already used by another project. Please choose a unique slug.', 'error')
-            return render_template('admin/project_form.html', form=form, title=f'Edit Project: {project.title}')
-
-        project.title = form.title.data.strip()
-        project.slug = slug
-        project.summary = form.summary.data.strip()
-        project.description = form.description.data.strip()
-        project.problem = form.problem.data.strip() if form.problem.data else None
-        project.approach = form.approach.data.strip() if form.approach.data else None
-        project.key_features = form.key_features.data.strip() if form.key_features.data else None
-        project.key_learnings = form.key_learnings.data.strip() if form.key_learnings.data else None
-        project.challenges = form.challenges.data.strip() if form.challenges.data else None
-        project.future_improvements = form.future_improvements.data.strip() if form.future_improvements.data else None
-        project.category = form.category.data
-        project.technologies = form.technologies.data.strip()
-        project.github_url = form.github_url.data.strip() if form.github_url.data else None
-        project.demo_url = form.demo_url.data.strip() if form.demo_url.data else None
-        project.image_url = form.image_url.data.strip() if form.image_url.data else None
-        project.featured = form.featured.data
-        project.published = form.published.data
-        project.order_num = form.order_num.data or 0
-
-        db.session.commit()
-        flash(f'Project "{project.title}" updated successfully!', 'success')
-        return redirect(url_for('admin.projects'))
-
-    return render_template('admin/project_form.html', form=form, title=f'Edit Project: {project.title}')
-
-
-@admin_bp.route('/projects/<int:id>/delete', methods=['POST'])
-def project_delete(id):
-    project = Project.query.get_or_404(id)
-    title = project.title
-    db.session.delete(project)
-    db.session.commit()
-    flash(f'Project "{title}" was deleted.', 'info')
-    return redirect(url_for('admin.projects'))
-
-
-@admin_bp.route('/projects/<int:id>/toggle-publish', methods=['POST'])
-def project_toggle_publish(id):
-    project = Project.query.get_or_404(id)
-    project.published = not project.published
-    db.session.commit()
-    flash(f'Publication status for "{project.title}" updated to {project.published}.', 'success')
-    return redirect(url_for('admin.projects'))
-
-
-@admin_bp.route('/projects/<int:id>/toggle-feature', methods=['POST'])
-def project_toggle_feature(id):
-    project = Project.query.get_or_404(id)
-    project.featured = not project.featured
-    db.session.commit()
-    flash(f'Featured status for "{project.title}" updated to {project.featured}.', 'success')
-    return redirect(url_for('admin.projects'))
 
 
 # ===================== CERTIFICATIONS MANAGEMENT =====================
@@ -393,20 +273,22 @@ def message_delete(id):
 def settings():
     form = SiteSettingsForm()
     if request.method == 'GET':
-        form.hero_tagline.data = SiteSetting.get('hero_tagline', 'Engineer in progress. Developer by curiosity. Builder by ambition.')
-        form.hero_bio.data = SiteSetting.get('hero_bio', "First-year engineering student at École Nationale Polytechnique d'Alger (ENP). Exploring the intersection of software, backend systems, and AI-driven mobile development.")
-        form.status_text.data = SiteSetting.get('status_text', 'First-year Engineering Student at ENP')
-        form.github_url.data = SiteSetting.get('github_url', 'https://github.com/ramikhaled')
-        form.linkedin_url.data = SiteSetting.get('linkedin_url', 'https://linkedin.com/in/rami-khaled')
-        form.contact_email.data = SiteSetting.get('contact_email', 'rami.khaled@example.dz')
+        form.hero_tagline.data = SiteSetting.get('hero_tagline', 'Engineering Student • Developer • Future Builder')
+        form.hero_bio.data = SiteSetting.get('hero_bio', "Exploring AI, software development, and the future of intelligent applications.")
+        form.status_text.data = SiteSetting.get('status_text', 'First-Year Engineering Student @ ENP Algiers')
+        form.github_url.data = SiteSetting.get('github_url', '')
+        form.linkedin_url.data = SiteSetting.get('linkedin_url', '')
+        form.instagram_url.data = SiteSetting.get('instagram_url', 'https://www.instagram.com/ramikld10/')
+        form.contact_email.data = SiteSetting.get('contact_email', 'ramikld01@gmail.com')
 
     if form.validate_on_submit():
-        SiteSetting.set('hero_tagline', form.hero_tagline.data.strip(), 'Homepage hero tagline')
-        SiteSetting.set('hero_bio', form.hero_bio.data.strip(), 'Homepage hero bio')
-        SiteSetting.set('status_text', form.status_text.data.strip(), 'Current status badge text')
-        SiteSetting.set('github_url', form.github_url.data.strip(), 'GitHub profile URL')
-        SiteSetting.set('linkedin_url', form.linkedin_url.data.strip(), 'LinkedIn profile URL')
-        SiteSetting.set('contact_email', form.contact_email.data.strip(), 'Contact email address')
+        SiteSetting.set('hero_tagline', (form.hero_tagline.data or '').strip(), 'Homepage hero tagline')
+        SiteSetting.set('hero_bio', (form.hero_bio.data or '').strip(), 'Homepage hero bio')
+        SiteSetting.set('status_text', (form.status_text.data or '').strip(), 'Current status badge text')
+        SiteSetting.set('github_url', (form.github_url.data or '').strip(), 'GitHub profile URL')
+        SiteSetting.set('linkedin_url', (form.linkedin_url.data or '').strip(), 'LinkedIn profile URL')
+        SiteSetting.set('instagram_url', (form.instagram_url.data or '').strip(), 'Instagram profile URL')
+        SiteSetting.set('contact_email', (form.contact_email.data or '').strip(), 'Contact email address')
         flash('Portfolio site settings updated successfully!', 'success')
         return redirect(url_for('admin.settings'))
 

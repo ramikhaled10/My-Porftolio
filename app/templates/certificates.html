@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Certificates | Rami Khaled{% endblock %}
+{% block meta_description %}Certificates and courses: 100 Days of Code with Angela Yu, Flutter with IBM on Coursera, and current EDUCA / EDUCBA study.{% endblock %}
+
+{% block content %}
+<div class="page-enter max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <header class="mb-12">
+        <span class="section-label">Certificates</span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mt-4 mb-4" style="color: var(--text);">
+            Courses & Certificates
+        </h1>
+        <p class="text-lg leading-relaxed max-w-2xl" style="color: var(--text-secondary);">
+            Online courses I have completed or that I am taking right now to build my skills outside of university classes.
+        </p>
+    </header>
+
+    {% if certifications %}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {% for cert in certifications %}
+        <article class="glass-panel p-6 flex flex-col reveal">
+            {% if cert.image_url %}
+            <img src="{{ cert.image_url }}" alt="{{ cert.title }}" class="w-full h-40 object-cover rounded-xl mb-4">
+            {% endif %}
+            <p class="text-xs font-mono mb-1" style="color: var(--primary);">{{ cert.issue_date }}</p>
+            <h2 class="text-lg font-bold" style="color: var(--text);">{{ cert.title }}</h2>
+            <p class="text-sm mt-1" style="color: var(--text-secondary);">{{ cert.issuer }}</p>
+            {% if cert.description %}
+            <p class="text-sm mt-3 leading-relaxed flex-grow" style="color: var(--text-secondary);">{{ cert.description }}</p>
+            {% endif %}
+            {% if cert.skills_list %}
+            <div class="flex flex-wrap gap-1.5 mt-4">
+                {% for s in cert.skills_list %}
+                <span class="text-[11px] px-2 py-0.5 rounded-full" style="background: var(--primary-subtle); color: var(--primary);">{{ s }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% if cert.credential_url %}
+            <a href="{{ cert.credential_url }}" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-sm font-semibold mt-4" style="color: var(--primary);">
+                View credential <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+            </a>
+            {% endif %}
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-sm" style="color: var(--muted);">Certificates will appear here once they are added in the admin dashboard.</p>
+    {% endif %}
+</div>
+{% endblock %}

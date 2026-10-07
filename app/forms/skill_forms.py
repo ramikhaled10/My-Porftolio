@@ -3,9 +3,9 @@ from wtforms import StringField, SelectField, IntegerField, SubmitField
 from wtforms.validators import DataRequired, Length, Optional
 
 LEVEL_CHOICES = [
-    ('Comfortable', 'Comfortable'),
-    ('Familiar', 'Familiar'),
+    ('Foundation', 'Foundation'),
     ('Developing', 'Developing'),
+    ('Familiar', 'Familiar'),
     ('Exploring', 'Exploring')
 ]
 
